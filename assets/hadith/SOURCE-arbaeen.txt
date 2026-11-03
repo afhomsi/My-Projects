@@ -1,0 +1,16 @@
+Matn of al-Arba'un an-Nawawiyya (the Forty Hadith of Imam an-Nawawi, d. 676 AH)
+
+Rights: the text of the ahadith and of an-Nawawi's book (including his
+takhreej lines) is centuries old and in the public domain. No modern edition's
+tahqeeq, notes or numbering-specific apparatus is included.
+
+How this file was made: the matn, tashkeel and takhreej were typed by hand
+(tool/matn/*.json, merged by tool/build_arbaeen.dart). Nothing was copied from
+an online dataset or a modern printed edition.
+
+Status: DRAFT. The text has NOT yet been checked word by word against an old
+printed edition. Before release, check every hadith against the chosen edition,
+record that edition here and in README.md, then set "status" to "checked" in
+tool/build_arbaeen.dart. The app shows a draft notice until then.
+
+Titles (the short headings in the index) are ours, not an-Nawawi's.
