@@ -53,5 +53,6 @@ owner's key, from these repository secrets:
 | `ANDROID_KEY_ALIAS` | key alias |
 | `ANDROID_KEY_PASSWORD` | key password |
 
-Without them the release job stops with an error; it never falls back to the
-debug key.
+**Temporary:** until these secrets are added, the job publishes test builds
+signed with the debug key (the owner agreed on 2026-11-03 to set the key up
+later). Phones must uninstall the test build once when the real key arrives.

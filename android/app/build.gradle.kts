@@ -51,9 +51,10 @@ android {
 
     buildTypes {
         release {
-            // Only the owner's key signs release builds. Without key.properties
-            // a release build is left unsigned and cannot be installed.
+            // The owner's key when android/key.properties exists. Until the
+            // owner adds it (agreed 2026-11-03), test builds use the debug key.
             signingConfig = signingConfigs.findByName("release")
+                ?: signingConfigs.getByName("debug")
         }
     }
 }
