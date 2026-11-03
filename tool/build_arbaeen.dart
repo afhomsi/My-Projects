@@ -27,11 +27,17 @@ void main() {
     exit(1);
   }
 
+  final unchecked = [
+    for (final h in ahadith)
+      if (h['checked'] == null) h['number'],
+  ];
   final book = {
     'title': 'الأربعون النووية',
     'author': 'الإمام أبو زكريا يحيى بن شرف النووي (ت ٦٧٦هـ)',
-    'status': 'draft',
-    'note': 'Matn typed by hand; not yet checked against a printed edition.',
+    'status': unchecked.isEmpty ? 'checked' : 'draft',
+    'note': unchecked.isEmpty
+        ? 'Every hadith was checked word by word against a printed edition.'
+        : 'Not yet checked against a printed edition: ${unchecked.join(', ')}.',
     'ahadith': ahadith,
   };
   const encoder = JsonEncoder.withIndent('  ');

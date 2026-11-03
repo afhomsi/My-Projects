@@ -45,8 +45,7 @@ class _HadithScreenState extends State<HadithScreen> {
         controller: _controller,
         itemCount: ahadith.length,
         onPageChanged: (i) => setState(() => _index = i),
-        itemBuilder: (context, i) =>
-            HadithPage(hadith: ahadith[i], isDraft: widget.book.isDraft),
+        itemBuilder: (context, i) => HadithPage(hadith: ahadith[i]),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
@@ -77,10 +76,9 @@ class _HadithScreenState extends State<HadithScreen> {
 
 /// The content of one hadith: title, matn, narrator, takhreej, then sharh.
 class HadithPage extends StatelessWidget {
-  const HadithPage({super.key, required this.hadith, this.isDraft = false});
+  const HadithPage({super.key, required this.hadith});
 
   final Hadith hadith;
-  final bool isDraft;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +134,7 @@ class HadithPage extends StatelessWidget {
                   ],
                 ),
         ),
-        if (isDraft) ...[
+        if (!hadith.isChecked) ...[
           const SizedBox(height: 16),
           Text(
             s.draftNotice,
