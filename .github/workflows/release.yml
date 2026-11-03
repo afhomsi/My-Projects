@@ -1,0 +1,68 @@
+name: Release APK
+
+# Builds split APKs (arm, arm64) signed with the owner's key and publishes
+# them on the repo's Releases page, which serves as the download page:
+# https://github.com/afhomsi/My-Projects/releases/latest
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    env:
+      KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require the owner's signing key
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::Add the ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD secrets. Release builds are never signed with the debug key."
+            exit 1
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Write signing config
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/app/release.jks
+          cat > android/key.properties <<PROPS
+          storeFile=release.jks
+          storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
+          PROPS
+
+      - run: flutter pub get
+      - run: flutter test
+      - name: Build split APKs
+        run: >
+          flutter build apk --release --split-per-abi
+          --target-platform android-arm,android-arm64
+          --build-number ${{ github.run_number }}
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: *//; s/+.*//')
+          TAG="v${VERSION}-build.${{ github.run_number }}"
+          OUT=build/app/outputs/flutter-apk
+          mv $OUT/app-arm64-v8a-release.apk "$OUT/arbaeen-${TAG}-arm64.apk"
+          mv $OUT/app-armeabi-v7a-release.apk "$OUT/arbaeen-${TAG}-arm.apk"
+          gh release create "$TAG" "$OUT"/arbaeen-*.apk \
+            --target "$GITHUB_SHA" --latest \
+            --title "الأربعون النووية ${TAG}" \
+            --notes "Most phones: the arm64 file. Older phones: the arm file. The matn is still a draft until checked against a printed edition."

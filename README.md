@@ -38,3 +38,20 @@ flutter run -d chrome
 To change the text, edit `tool/matn/*.json`, then run
 `dart run tool/build_arbaeen.dart` to rebuild `assets/hadith/arbaeen.json`.
 A test fails if the two are out of sync.
+
+## Download
+
+Every push to `main` builds the APKs and publishes them at
+<https://github.com/afhomsi/My-Projects/releases/latest>
+(`.github/workflows/release.yml`). Release builds are signed only with the
+owner's key, from these repository secrets:
+
+| Secret | Value |
+| --- | --- |
+| `ANDROID_KEYSTORE_BASE64` | the `.jks` file, base64-encoded (`base64 -w0 upload.jks`) |
+| `ANDROID_KEYSTORE_PASSWORD` | keystore password |
+| `ANDROID_KEY_ALIAS` | key alias |
+| `ANDROID_KEY_PASSWORD` | key password |
+
+Without them the release job stops with an error; it never falls back to the
+debug key.
