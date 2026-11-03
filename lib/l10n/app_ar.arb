@@ -1,0 +1,24 @@
+{
+  "@@locale": "ar",
+  "appTitle": "الأربعون النووية",
+  "indexTitle": "الفهرس",
+  "hadithNumber": "الحديث {number}",
+  "@hadithNumber": {
+    "placeholders": { "number": { "type": "String" } }
+  },
+  "narratorLabel": "الراوي: {name}",
+  "@narratorLabel": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "sourceLabel": "التخريج",
+  "sharhTitle": "الشرح",
+  "sharhComingSoon": "الشرح المختصر سيضاف بعد توثيق مصدره وحقوقه.",
+  "previous": "السابق",
+  "next": "التالي",
+  "draftNotice": "النص مسودة لم تراجع بعد على نسخة مطبوعة.",
+  "loadError": "تعذر تحميل الكتاب.",
+  "ahadithCount": "{count} حديثًا",
+  "@ahadithCount": {
+    "placeholders": { "count": { "type": "String" } }
+  }
+}
