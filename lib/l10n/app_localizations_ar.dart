@@ -29,10 +29,13 @@ class SAr extends S {
   String get sourceLabel => 'التخريج';
 
   @override
-  String get sharhTitle => 'الشرح';
+  String get sharhTitle => 'الشرح المختصر';
 
   @override
   String get sharhComingSoon => 'الشرح المختصر سيضاف بعد توثيق مصدره وحقوقه.';
+
+  @override
+  String get sharhDraftNotice => 'مسودة: لم يراجع هذا الشرح بعد طالب علم مختص.';
 
   @override
   String get previous => 'السابق';

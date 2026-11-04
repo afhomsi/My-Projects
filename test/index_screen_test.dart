@@ -60,4 +60,28 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('الحديث ١'), findsOneWidget);
   });
+
+  testWidgets('the hadith page shows the short sharh as a draft', (
+    tester,
+  ) async {
+    await _pumpApp(tester);
+
+    await tester.tap(find.text('إنما الأعمال بالنيات'));
+    await tester.pumpAndSettle();
+    final sharh = find.textContaining('أصل في أن قبول العمل');
+    await tester.scrollUntilVisible(
+      sharh,
+      300,
+      scrollable: find
+          .descendant(
+            of: find.byType(ListView),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    expect(sharh, findsOneWidget);
+    expect(find.text('الشرح المختصر'), findsOneWidget);
+    expect(find.text('شرح مختصر من إعداد التطبيق'), findsOneWidget);
+    expect(find.textContaining('لم يراجع هذا الشرح'), findsOneWidget);
+  });
 }

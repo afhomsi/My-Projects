@@ -126,7 +126,7 @@ abstract class S {
   /// No description provided for @sharhTitle.
   ///
   /// In ar, this message translates to:
-  /// **'الشرح'**
+  /// **'الشرح المختصر'**
   String get sharhTitle;
 
   /// No description provided for @sharhComingSoon.
@@ -134,6 +134,12 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'الشرح المختصر سيضاف بعد توثيق مصدره وحقوقه.'**
   String get sharhComingSoon;
+
+  /// No description provided for @sharhDraftNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسودة: لم يراجع هذا الشرح بعد طالب علم مختص.'**
+  String get sharhDraftNotice;
 
   /// No description provided for @previous.
   ///

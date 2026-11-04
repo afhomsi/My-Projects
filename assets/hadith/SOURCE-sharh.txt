@@ -1,0 +1,17 @@
+Short sharh (الشرح المختصر) for each of the 42 ahadith
+
+Rights: written fresh for this app (tool/sharh/*.json, merged into
+assets/hadith/arbaeen.json by tool/build_arbaeen.dart). It restates, in our
+own words, meanings that are well known among the classical commentators of
+the Forty (an-Nawawi, Ibn Daqiq al-'Eid, Ibn Rajab). No sentence was copied
+from a printed or online sharh, classical or modern. Ibn 'Uthaymeen's and
+al-Khudayr's shuruh were not used. The app may use this text freely; it is
+offered under CC BY 4.0 like the rest of the app's own content.
+
+Status: DRAFT. Not yet reviewed by a qualified student of knowledge. The app
+shows a draft notice under every sharh that is not reviewed. After review, add
+"reviewed": "<name of reviewer>" to that entry in tool/sharh/*.json and run
+dart run tool/build_arbaeen.dart.
+
+Longer quoted shuruh (the "more" section of v1) come later, only from old
+editions of free classical works, each with its own source line.
