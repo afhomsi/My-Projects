@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/hadith.dart';
 import '../features/plan/plan_controller.dart';
-import 'device_speech_voice.dart';
 import 'hadith_voice.dart';
+import 'recording_voice.dart';
 
 /// Repeat counts offered to the user. 0 means "without stopping".
 const repeatChoices = [1, 3, 10, 20, 50, 0];
@@ -17,8 +17,8 @@ const _repeatKey = 'listen.repeat';
 
 /// The voice that reads the ahadith; replaced by a fake in tests.
 final hadithVoiceProvider = Provider<HadithVoice>((ref) {
-  final voice = DeviceSpeechVoice();
-  ref.onDispose(voice.stop);
+  final voice = RecordingVoice();
+  ref.onDispose(voice.dispose);
   return voice;
 });
 
@@ -43,7 +43,7 @@ class Listen {
   /// Which repetition is playing now, from 1.
   final int round;
 
-  /// True after the voice could not play on this device.
+  /// True after the recording could not be played.
   final bool unavailable;
 
   bool get isEndless => repeatCount == 0;

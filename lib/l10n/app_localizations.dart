@@ -387,16 +387,10 @@ abstract class S {
   /// **'المرة {round}'**
   String repeatRoundEndless(String round);
 
-  /// No description provided for @deviceVoiceNotice.
-  ///
-  /// In ar, this message translates to:
-  /// **'صوت الجهاز مؤقت حتى يتوفر تسجيل مأذون، وقد يخطئ في التشكيل.'**
-  String get deviceVoiceNotice;
-
   /// No description provided for @voiceUnavailable.
   ///
   /// In ar, this message translates to:
-  /// **'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.'**
+  /// **'تعذر تشغيل التسجيل.'**
   String get voiceUnavailable;
 
   /// No description provided for @reciteAction.

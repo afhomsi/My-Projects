@@ -12,8 +12,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
-  flutter_tts: ^4.2.5
   intl: any
+  just_audio: ^0.10.6
   shared_preferences: ^2.5.6
   speech_to_text: ^7.5.0
 
@@ -27,3 +27,4 @@ flutter:
   generate: true
   assets:
     - assets/hadith/
+    - assets/audio/

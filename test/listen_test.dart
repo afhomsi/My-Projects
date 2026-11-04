@@ -3,14 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:arbaeen/app.dart';
-import 'package:arbaeen/audio/device_speech_voice.dart';
 import 'package:arbaeen/audio/hadith_voice.dart';
 import 'package:arbaeen/audio/listen_controller.dart';
+import 'package:arbaeen/audio/recordings.dart';
 import 'package:arbaeen/data/hadith.dart';
 import 'package:arbaeen/data/hadith_repository.dart';
 import 'package:arbaeen/features/plan/plan_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,9 +27,6 @@ class FakeVoice implements HadithVoice {
   Completer<void>? _current;
 
   bool get isPlaying => _current != null;
-
-  @override
-  VoiceKind get kind => VoiceKind.deviceSpeech;
 
   @override
   Future<void> play(Hadith hadith) {
@@ -57,6 +53,7 @@ class FakeVoice implements HadithVoice {
 Future<(FakeVoice, SharedPreferences)> _openHadith(
   WidgetTester tester, {
   Map<String, Object> saved = const {},
+  Set<int> recorded = const {1, 2, 3},
 }) async {
   SharedPreferences.setMockInitialValues(saved);
   final prefs = await SharedPreferences.getInstance();
@@ -67,6 +64,7 @@ Future<(FakeVoice, SharedPreferences)> _openHadith(
         bookProvider.overrideWith((ref) async => _loadBook()),
         sharedPreferencesProvider.overrideWithValue(prefs),
         hadithVoiceProvider.overrideWithValue(voice),
+        recordedNumbersProvider.overrideWith((ref) async => recorded),
       ],
       child: const ArbaeenApp(),
     ),
@@ -98,7 +96,6 @@ void main() {
     await tester.pump();
     expect(voice.played, [1]);
     expect(_round(tester), 'المرة ١ من ٣');
-    expect(find.byKey(const ValueKey('listen-notice')), findsOneWidget);
 
     await _finishRound(tester, voice);
     expect(voice.played, [1, 1]);
@@ -194,58 +191,39 @@ void main() {
     expect(voice.played, [1]);
   });
 
-  testWidgets('says so when the device has no Arabic voice', (tester) async {
+  testWidgets('says so when the recording cannot be played', (tester) async {
     final (voice, _) = await _openHadith(tester);
     voice.unavailable = true;
 
     await tester.tap(find.byKey(const ValueKey('listen-toggle')));
     await tester.pumpAndSettle();
-    expect(
-      find.text(
-        'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.',
-      ),
-      findsOneWidget,
-    );
+    expect(find.text('تعذر تشغيل التسجيل.'), findsOneWidget);
     expect(find.text('استمع'), findsOneWidget);
   });
 
-  group('DeviceSpeechVoice', () {
-    TestWidgetsFlutterBinding.ensureInitialized();
-    const channel = MethodChannel('flutter_tts');
-    final calls = <MethodCall>[];
-    var arabic = true;
+  testWidgets('no listen button for a hadith without a recording', (
+    tester,
+  ) async {
+    await _openHadith(tester, recorded: {2});
+    expect(find.byKey(const ValueKey('listen-toggle')), findsNothing);
 
-    setUp(() {
-      calls.clear();
-      arabic = true;
-      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-          .setMockMethodCallHandler(channel, (call) async {
-            calls.add(call);
-            return call.method == 'isLanguageAvailable' ? arabic : 1;
-          });
-    });
+    await tester.tap(find.text('التالي'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('listen-toggle')), findsOneWidget);
+  });
 
-    final hadith = _loadBook().ahadith.first;
-
-    test('speaks the full matn in Arabic', () async {
-      await DeviceSpeechVoice().play(hadith);
-      expect(calls.map((c) => c.method), [
-        'awaitSpeakCompletion',
-        'isLanguageAvailable',
-        'setLanguage',
-        'speak',
-      ]);
-      expect(calls[2].arguments, 'ar');
-      expect(calls[3].arguments, hadith.matn);
-    });
-
-    test('throws VoiceUnavailable without an Arabic voice', () async {
-      arabic = false;
-      await expectLater(
-        DeviceSpeechVoice().play(hadith),
-        throwsA(isA<VoiceUnavailable>()),
-      );
-      expect(calls.map((c) => c.method), isNot(contains('speak')));
-    });
+  test('recordings are found by their file names', () {
+    expect(recordingAsset(7), 'assets/audio/07.mp3');
+    expect(recordingAsset(42), 'assets/audio/42.mp3');
+    expect(
+      recordedNumbers([
+        'assets/audio/01.mp3',
+        'assets/audio/24.mp3',
+        'assets/audio/README.md',
+        'assets/audio/LICENSE-x.txt',
+        'assets/hadith/arbaeen.json',
+      ]),
+      {1, 24},
+    );
   });
 }

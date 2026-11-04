@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../audio/hadith_voice.dart';
 import '../../audio/listen_controller.dart';
+import '../../audio/recordings.dart';
 import '../../data/hadith.dart';
 import '../../l10n/app_localizations.dart';
 import '../arabic_numbers.dart';
 
 /// Listen to the current hadith, repeated the number of times the user chose.
+/// Shows nothing for a hadith that has no bundled recording.
 class ListenBar extends ConsumerWidget {
   const ListenBar({super.key, required this.hadith});
 
@@ -15,17 +16,14 @@ class ListenBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final recorded = ref.watch(recordedNumbersProvider).valueOrNull ?? {};
+    if (!recorded.contains(hadith.number)) return const SizedBox.shrink();
     final s = S.of(context);
     final theme = Theme.of(context);
     final listen = ref.watch(listenProvider);
     final controller = ref.read(listenProvider.notifier);
     final playingThis = listen.playing == hadith.number;
-    final notice = listen.unavailable
-        ? s.voiceUnavailable
-        : playingThis &&
-              ref.read(hadithVoiceProvider).kind == VoiceKind.deviceSpeech
-        ? s.deviceVoiceNotice
-        : null;
+    final notice = listen.unavailable ? s.voiceUnavailable : null;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
