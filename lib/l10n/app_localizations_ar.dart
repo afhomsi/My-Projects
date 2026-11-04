@@ -231,4 +231,128 @@ class SAr extends S {
   @override
   String get voiceUnavailable =>
       'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.';
+
+  @override
+  String get reciteAction => 'سمّع بصوتك';
+
+  @override
+  String reciteTitle(String number) {
+    return 'التسميع بالصوت: الحديث $number';
+  }
+
+  @override
+  String get reciteHelp =>
+      'اضغط على الميكروفون واقرأ الحديث من حفظك. تظهر كل كلمة حين تقولها، ويظهر الخطأ بالأحمر.';
+
+  @override
+  String get reciteStart => 'ابدأ التسميع';
+
+  @override
+  String get reciteContinue => 'تابع';
+
+  @override
+  String get reciteStop => 'أوقف';
+
+  @override
+  String get reciteRestart => 'من البداية';
+
+  @override
+  String get reciteShowText => 'أظهر النص';
+
+  @override
+  String reciteHeard(String text) {
+    return 'سمعت: $text';
+  }
+
+  @override
+  String reciteProgress(String done, String total) {
+    return 'قرأت $done من $total';
+  }
+
+  @override
+  String get reciteMistakes => 'الأخطاء';
+
+  @override
+  String mistakeWrong(String heard, String expected) {
+    return 'سمعت «$heard» والصواب «$expected»';
+  }
+
+  @override
+  String mistakeSkippedWord(String expected) {
+    return 'نسيت كلمة «$expected»';
+  }
+
+  @override
+  String mistakeSkippedPart(String expected) {
+    return 'نسيت جملة: «$expected»';
+  }
+
+  @override
+  String mistakeExtra(String heard, String expected) {
+    return 'زدت «$heard» قبل «$expected»';
+  }
+
+  @override
+  String mistakeExtraAtEnd(String heard) {
+    return 'زدت بعد النهاية: «$heard»';
+  }
+
+  @override
+  String mistakeHarakat(String heard, String expected) {
+    return 'خطأ في الحركة: سمعت «$heard» والصواب «$expected»';
+  }
+
+  @override
+  String reciteDone(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'سمّعت الحديث كاملًا، وفيه $n خطأ.',
+      few: 'سمّعت الحديث كاملًا، وفيه $n أخطاء.',
+      two: 'سمّعت الحديث كاملًا، وفيه خطآن.',
+      one: 'سمّعت الحديث كاملًا، وفيه خطأ واحد.',
+      zero: 'أحسنت! سمّعت الحديث كاملًا دون خطأ.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recitePrivacyDevice =>
+      'يُتعرَّف على صوتك في هاتفك، ولا يُرسل إلى أي مكان.';
+
+  @override
+  String get recitePrivacyOnline =>
+      'سمحت بالتعرف عبر الإنترنت: يُرسل صوتك إلى خدمة التعرف على الكلام في جهازك.';
+
+  @override
+  String get recitePrivacyWeb =>
+      'في المتصفح يُرسل صوتك إلى خدمة التعرف على الكلام في المتصفح.';
+
+  @override
+  String get reciteDeviceOnly => 'على الهاتف فقط';
+
+  @override
+  String get reciteAllowOnline => 'اسمح بالتعرف عبر الإنترنت';
+
+  @override
+  String get reciteErrorOffline =>
+      'لا يستطيع هاتفك التعرف على العربية دون إنترنت. ثبّت اللغة العربية للتعرف على الكلام دون اتصال من إعدادات الهاتف، أو اسمح بالتعرف عبر الإنترنت.';
+
+  @override
+  String get reciteErrorNetwork =>
+      'التعرف على الصوت يحتاج إلى اتصال بالإنترنت.';
+
+  @override
+  String get reciteErrorPermission =>
+      'لم يُسمح باستخدام الميكروفون. اسمح به من إعدادات الهاتف ثم حاول.';
+
+  @override
+  String get reciteErrorNoMic => 'لم يُعثر على ميكروفون.';
+
+  @override
+  String get reciteErrorUnavailable =>
+      'لا يمكن التعرف على الصوت على هذا الجهاز، أو لم يُسمح باستخدام الميكروفون.';
+
+  @override
+  String get reciteErrorOther => 'حدث خطأ في الاستماع. حاول مرة أخرى.';
 }

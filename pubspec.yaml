@@ -15,6 +15,7 @@ dependencies:
   flutter_tts: ^4.2.5
   intl: any
   shared_preferences: ^2.5.6
+  speech_to_text: ^7.5.0
 
 dev_dependencies:
   flutter_test:

@@ -172,5 +172,119 @@
     }
   },
   "deviceVoiceNotice": "صوت الجهاز مؤقت حتى يتوفر تسجيل مأذون، وقد يخطئ في التشكيل.",
-  "voiceUnavailable": "لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام."
+  "voiceUnavailable": "لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.",
+  "reciteAction": "سمّع بصوتك",
+  "reciteTitle": "التسميع بالصوت: الحديث {number}",
+  "@reciteTitle": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "reciteHelp": "اضغط على الميكروفون واقرأ الحديث من حفظك. تظهر كل كلمة حين تقولها، ويظهر الخطأ بالأحمر.",
+  "reciteStart": "ابدأ التسميع",
+  "reciteContinue": "تابع",
+  "reciteStop": "أوقف",
+  "reciteRestart": "من البداية",
+  "reciteShowText": "أظهر النص",
+  "reciteHeard": "سمعت: {text}",
+  "@reciteHeard": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "reciteProgress": "قرأت {done} من {total}",
+  "@reciteProgress": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "reciteMistakes": "الأخطاء",
+  "mistakeWrong": "سمعت «{heard}» والصواب «{expected}»",
+  "@mistakeWrong": {
+    "placeholders": {
+      "heard": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "mistakeSkippedWord": "نسيت كلمة «{expected}»",
+  "@mistakeSkippedWord": {
+    "placeholders": {
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "mistakeSkippedPart": "نسيت جملة: «{expected}»",
+  "@mistakeSkippedPart": {
+    "placeholders": {
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "mistakeExtra": "زدت «{heard}» قبل «{expected}»",
+  "@mistakeExtra": {
+    "placeholders": {
+      "heard": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "mistakeExtraAtEnd": "زدت بعد النهاية: «{heard}»",
+  "@mistakeExtraAtEnd": {
+    "placeholders": {
+      "heard": {
+        "type": "String"
+      }
+    }
+  },
+  "mistakeHarakat": "خطأ في الحركة: سمعت «{heard}» والصواب «{expected}»",
+  "@mistakeHarakat": {
+    "placeholders": {
+      "heard": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "reciteDone": "{count, plural, =0{أحسنت! سمّعت الحديث كاملًا دون خطأ.} =1{سمّعت الحديث كاملًا، وفيه خطأ واحد.} =2{سمّعت الحديث كاملًا، وفيه خطآن.} few{سمّعت الحديث كاملًا، وفيه {n} أخطاء.} other{سمّعت الحديث كاملًا، وفيه {n} خطأ.}}",
+  "@reciteDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "recitePrivacyDevice": "يُتعرَّف على صوتك في هاتفك، ولا يُرسل إلى أي مكان.",
+  "recitePrivacyOnline": "سمحت بالتعرف عبر الإنترنت: يُرسل صوتك إلى خدمة التعرف على الكلام في جهازك.",
+  "recitePrivacyWeb": "في المتصفح يُرسل صوتك إلى خدمة التعرف على الكلام في المتصفح.",
+  "reciteDeviceOnly": "على الهاتف فقط",
+  "reciteAllowOnline": "اسمح بالتعرف عبر الإنترنت",
+  "reciteErrorOffline": "لا يستطيع هاتفك التعرف على العربية دون إنترنت. ثبّت اللغة العربية للتعرف على الكلام دون اتصال من إعدادات الهاتف، أو اسمح بالتعرف عبر الإنترنت.",
+  "reciteErrorNetwork": "التعرف على الصوت يحتاج إلى اتصال بالإنترنت.",
+  "reciteErrorPermission": "لم يُسمح باستخدام الميكروفون. اسمح به من إعدادات الهاتف ثم حاول.",
+  "reciteErrorNoMic": "لم يُعثر على ميكروفون.",
+  "reciteErrorUnavailable": "لا يمكن التعرف على الصوت على هذا الجهاز، أو لم يُسمح باستخدام الميكروفون.",
+  "reciteErrorOther": "حدث خطأ في الاستماع. حاول مرة أخرى."
 }

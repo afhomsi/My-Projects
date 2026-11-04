@@ -8,6 +8,7 @@ import '../../theme/app_theme.dart';
 import '../arabic_numbers.dart';
 import '../audio/listen_bar.dart';
 import '../memorize/memorize_screen.dart';
+import '../recitation/recite_screen.dart';
 
 /// One page per hadith. Swipe, or use the buttons, to move between ahadith.
 class HadithScreen extends ConsumerStatefulWidget {
@@ -47,6 +48,19 @@ class _HadithScreenState extends ConsumerState<HadithScreen> {
       appBar: AppBar(
         title: Text(s.hadithNumber(arabicNumber(current.number))),
         actions: [
+          IconButton(
+            key: const ValueKey('open-recite'),
+            tooltip: s.reciteAction,
+            icon: const Icon(Icons.mic_none),
+            onPressed: () {
+              ref.read(listenProvider.notifier).stop();
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => ReciteScreen(hadith: current),
+                ),
+              );
+            },
+          ),
           IconButton(
             key: const ValueKey('open-memorize'),
             tooltip: s.memorizeAction,
