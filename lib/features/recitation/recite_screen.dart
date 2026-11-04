@@ -21,6 +21,26 @@ Grade suggestedGrade(int mistakes) => switch (mistakes) {
   _ => Grade.again,
 };
 
+/// What [m] says, in words.
+String mistakeText(S s, Mistake m) => switch (m.kind) {
+  MistakeKind.wrong => s.mistakeWrong(m.heard ?? '', m.expected),
+  MistakeKind.skippedWord => s.mistakeSkippedWord(m.expected),
+  MistakeKind.skippedPart => s.mistakeSkippedPart(m.expected),
+  MistakeKind.extra => s.mistakeExtra(m.heard ?? '', m.expected),
+  MistakeKind.extraAtEnd => s.mistakeExtraAtEnd(m.heard ?? ''),
+  MistakeKind.harakat => s.mistakeHarakat(m.heard ?? '', m.expected),
+};
+
+String listenErrorText(S s, ListenError error, {required bool online}) =>
+    switch (error) {
+      ListenError.needsNetwork =>
+        online ? s.reciteErrorNetwork : s.reciteErrorOffline,
+      ListenError.permission => s.reciteErrorPermission,
+      ListenError.noMicrophone => s.reciteErrorNoMic,
+      ListenError.unavailable => s.reciteErrorUnavailable,
+      ListenError.other => s.reciteErrorOther,
+    };
+
 /// Tasmee' by voice: the reciter says the hadith from memory, each word
 /// shows as it is said, and mistakes show in red and in a list.
 class ReciteScreen extends ConsumerStatefulWidget {
@@ -100,24 +120,6 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
     Navigator.of(context).pop(card);
   }
 
-  String _mistakeText(S s, Mistake m) => switch (m.kind) {
-    MistakeKind.wrong => s.mistakeWrong(m.heard ?? '', m.expected),
-    MistakeKind.skippedWord => s.mistakeSkippedWord(m.expected),
-    MistakeKind.skippedPart => s.mistakeSkippedPart(m.expected),
-    MistakeKind.extra => s.mistakeExtra(m.heard ?? '', m.expected),
-    MistakeKind.extraAtEnd => s.mistakeExtraAtEnd(m.heard ?? ''),
-    MistakeKind.harakat => s.mistakeHarakat(m.heard ?? '', m.expected),
-  };
-
-  String _errorText(S s, ListenError error, bool online) => switch (error) {
-    ListenError.needsNetwork =>
-      online ? s.reciteErrorNetwork : s.reciteErrorOffline,
-    ListenError.permission => s.reciteErrorPermission,
-    ListenError.noMicrophone => s.reciteErrorNoMic,
-    ListenError.unavailable => s.reciteErrorUnavailable,
-    ListenError.other => s.reciteErrorOther,
-  };
-
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
@@ -166,7 +168,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-          _RecitedMatn(
+          RecitedMatn(
             tokens: _tokens,
             indexOfToken: _indexOfToken,
             result: result,
@@ -186,7 +188,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
                       ? Colors.orange.shade800
                       : theme.colorScheme.error,
                 ),
-                title: Text(_mistakeText(s, m)),
+                title: Text(mistakeText(s, m)),
               ),
           ],
         ],
@@ -225,7 +227,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
                     child: Column(
                       children: [
                         Text(
-                          _errorText(s, error, online || kIsWeb),
+                          listenErrorText(s, error, online: online || kIsWeb),
                           style: TextStyle(
                             color: theme.colorScheme.onErrorContainer,
                           ),
@@ -300,7 +302,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
                 ],
               ),
               const SizedBox(height: 4),
-              _PrivacyLine(
+              PrivacyLine(
                 online: online,
                 onDeviceOnly: session.isListening ? null : _deviceOnly,
               ),
@@ -314,8 +316,12 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
 
 /// Says where the voice goes, and lets the user go back to recognition on
 /// the device after allowing the internet.
-class _PrivacyLine extends StatelessWidget {
-  const _PrivacyLine({required this.online, required this.onDeviceOnly});
+class PrivacyLine extends StatelessWidget {
+  const PrivacyLine({
+    super.key,
+    required this.online,
+    required this.onDeviceOnly,
+  });
 
   final bool online;
   final VoidCallback? onDeviceOnly;
@@ -385,14 +391,22 @@ class _GradeRow extends StatelessWidget {
 /// The matn as recited so far: words said show, words to come are hidden
 /// (keeping their width, so the text does not jump), and mistakes show in
 /// red. With [showText] the words to come show faded, to read along.
-class _RecitedMatn extends StatelessWidget {
-  const _RecitedMatn({
+class RecitedMatn extends StatelessWidget {
+  const RecitedMatn({
+    super.key,
     required this.tokens,
     required this.indexOfToken,
     required this.result,
     required this.hints,
     required this.showText,
+    this.from = 0,
+    this.to,
   });
+
+  /// Only the words of the matn from [from] up to, not including, [to]
+  /// show, as for a question of the short test.
+  final int from;
+  final int? to;
 
   final List<MatnWord> tokens;
   final List<int?> indexOfToken;
@@ -421,9 +435,9 @@ class _RecitedMatn extends StatelessWidget {
     final harakatStyle = style.copyWith(color: Colors.orange.shade800);
     final hintStyle = style.copyWith(color: scheme.primary);
     final spans = <InlineSpan>[];
-    for (var k = 0; k < tokens.length; k++) {
+    for (var k = from; k < (to ?? tokens.length); k++) {
       final t = tokens[k];
-      if (k > 0) spans.add(const TextSpan(text: ' '));
+      if (k > from) spans.add(const TextSpan(text: ' '));
       spans.add(TextSpan(text: t.prefix));
       final i = indexOfToken[k];
       if (i == null) {
@@ -449,7 +463,7 @@ class _RecitedMatn extends StatelessWidget {
     return Text.rich(
       TextSpan(style: style, children: spans),
       textAlign: TextAlign.justify,
-      key: const ValueKey('recited-matn'),
+      key: key ?? const ValueKey('recited-matn'),
     );
   }
 }

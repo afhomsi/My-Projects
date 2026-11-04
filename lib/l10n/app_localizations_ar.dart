@@ -350,4 +350,68 @@ class SAr extends S {
 
   @override
   String get reciteErrorOther => 'حدث خطأ في الاستماع. حاول مرة أخرى.';
+
+  @override
+  String get quizAction => 'اختبار قصير';
+
+  @override
+  String get quizHelp =>
+      'ثلاثة أسئلة من الأحاديث التي بدأت حفظها: تكمل كل حديث بصوتك من الموضع المعروض.';
+
+  @override
+  String get quizNeedsPlan => 'ابدأ حفظ حديث في الخطة ليُفتح الاختبار.';
+
+  @override
+  String get quizTitle => 'اختبار قصير';
+
+  @override
+  String quizQuestion(String n, String total) {
+    return 'السؤال $n من $total';
+  }
+
+  @override
+  String get quizFromStart => 'اقرأ الحديث من أوله:';
+
+  @override
+  String get quizGoOn => 'أكمل بعد قوله:';
+
+  @override
+  String get quizShowAnswer => 'أظهر الجواب';
+
+  @override
+  String get quizNext => 'السؤال التالي';
+
+  @override
+  String get quizFinish => 'النتيجة';
+
+  @override
+  String get quizResultTitle => 'نتيجة الاختبار';
+
+  @override
+  String quizScore(String right, String total) {
+    return 'أجبت عن $right من $total دون خطأ';
+  }
+
+  @override
+  String quizMistakes(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n خطأ',
+      few: '$n أخطاء',
+      two: 'خطآن',
+      one: 'خطأ واحد',
+      zero: 'دون خطأ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizGaveUp => 'أظهرت الجواب';
+
+  @override
+  String get quizAgain => 'اختبار آخر';
+
+  @override
+  String get quizDone => 'تم';
 }

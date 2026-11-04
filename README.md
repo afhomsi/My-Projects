@@ -36,6 +36,12 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
   screen says so and offers recognition over the internet, which the user
   must allow; the choice is saved and can be undone from the same screen.
   In Chrome the browser always recognizes online.
+- Short test (اختبار قصير, in the plan once a hadith is started): three
+  questions on different ahadith already started. Each shows the sentence
+  before (or the title, to start from the beginning) and the reciter goes
+  on by voice for at least 12 words; saying the cue again first is fine.
+  "Show the answer" gives up a question. The result lists each hadith with
+  its mistakes. The test does not change the plan.
 
 ## Content sources
 

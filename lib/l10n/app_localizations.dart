@@ -566,6 +566,102 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'حدث خطأ في الاستماع. حاول مرة أخرى.'**
   String get reciteErrorOther;
+
+  /// No description provided for @quizAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختبار قصير'**
+  String get quizAction;
+
+  /// No description provided for @quizHelp.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثلاثة أسئلة من الأحاديث التي بدأت حفظها: تكمل كل حديث بصوتك من الموضع المعروض.'**
+  String get quizHelp;
+
+  /// No description provided for @quizNeedsPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ حفظ حديث في الخطة ليُفتح الاختبار.'**
+  String get quizNeedsPlan;
+
+  /// No description provided for @quizTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختبار قصير'**
+  String get quizTitle;
+
+  /// No description provided for @quizQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال {n} من {total}'**
+  String quizQuestion(String n, String total);
+
+  /// No description provided for @quizFromStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'اقرأ الحديث من أوله:'**
+  String get quizFromStart;
+
+  /// No description provided for @quizGoOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكمل بعد قوله:'**
+  String get quizGoOn;
+
+  /// No description provided for @quizShowAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهر الجواب'**
+  String get quizShowAnswer;
+
+  /// No description provided for @quizNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'السؤال التالي'**
+  String get quizNext;
+
+  /// No description provided for @quizFinish.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتيجة'**
+  String get quizFinish;
+
+  /// No description provided for @quizResultTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة الاختبار'**
+  String get quizResultTitle;
+
+  /// No description provided for @quizScore.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجبت عن {right} من {total} دون خطأ'**
+  String quizScore(String right, String total);
+
+  /// No description provided for @quizMistakes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{دون خطأ} =1{خطأ واحد} =2{خطآن} few{{n} أخطاء} other{{n} خطأ}}'**
+  String quizMistakes(int count, String n);
+
+  /// No description provided for @quizGaveUp.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهرت الجواب'**
+  String get quizGaveUp;
+
+  /// No description provided for @quizAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختبار آخر'**
+  String get quizAgain;
+
+  /// No description provided for @quizDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get quizDone;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

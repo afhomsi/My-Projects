@@ -33,6 +33,10 @@ enum WordKind {
   /// "صلى الله عليه وسلم", written ﷺ in the matn. Saying it is good but
   /// leaving it out is not a mistake, and the sign itself stays shown.
   salawat,
+
+  /// A word shown as the cue of a test question, before the words to
+  /// recite: the reciter may say it again first, or not.
+  cue,
 }
 
 /// One word to recite and how it was recited.

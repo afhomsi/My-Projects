@@ -6,6 +6,7 @@ import '../../data/hadith_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../arabic_numbers.dart';
 import '../memorize/memorize_screen.dart';
+import '../quiz/quiz_screen.dart';
 import 'plan_controller.dart';
 import 'review_schedule.dart';
 
@@ -83,6 +84,22 @@ class _PlanBody extends ConsumerWidget {
               ],
             ),
           ),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          key: const ValueKey('plan-quiz'),
+          onPressed: plan.cards.isEmpty
+              ? null
+              : () => openQuiz(context, [
+                  for (final n in plan.cards.keys) hadith(n),
+                ]),
+          icon: const Icon(Icons.quiz_outlined),
+          label: Text(s.quizAction),
+        ),
+        Text(
+          plan.cards.isEmpty ? s.quizNeedsPlan : s.quizHelp,
+          style: theme.textTheme.bodySmall,
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         Text(s.newHadithTitle, style: theme.textTheme.titleMedium),
