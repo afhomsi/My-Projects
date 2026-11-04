@@ -22,6 +22,7 @@ class Hadith {
     required this.matn,
     required this.source,
     this.shuruh = const [],
+    this.checkedAgainst,
   });
 
   factory Hadith.fromJson(Map<String, dynamic> json) => Hadith(
@@ -34,6 +35,7 @@ class Hadith {
       for (final s in (json['shuruh'] as List<dynamic>? ?? const []))
         Sharh.fromJson(s as Map<String, dynamic>),
     ],
+    checkedAgainst: json['checked'] as String?,
   );
 
   final int number;
@@ -46,6 +48,13 @@ class Hadith {
   /// The takhreej as an-Nawawi wrote it, e.g. "رواه البخاري ومسلم".
   final String source;
   final List<Sharh> shuruh;
+
+  /// The printed edition this hadith was checked against word by word,
+  /// or null while it is still a draft.
+  final String? checkedAgainst;
+
+  /// True once the matn and takhreej were checked against a printed edition.
+  bool get isChecked => checkedAgainst != null;
 }
 
 /// The whole book: metadata plus the 42 ahadith in order.
@@ -53,14 +62,12 @@ class Book {
   const Book({
     required this.title,
     required this.author,
-    required this.isDraft,
     required this.ahadith,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
     title: json['title'] as String,
     author: json['author'] as String,
-    isDraft: json['status'] == 'draft',
     ahadith: [
       for (final h in json['ahadith'] as List<dynamic>)
         Hadith.fromJson(h as Map<String, dynamic>),
@@ -70,7 +77,8 @@ class Book {
   final String title;
   final String author;
 
-  /// True until the matn has been checked by hand against a printed edition.
-  final bool isDraft;
   final List<Hadith> ahadith;
+
+  /// True until every hadith has been checked against a printed edition.
+  bool get isDraft => ahadith.any((h) => !h.isChecked);
 }

@@ -10,7 +10,21 @@ an online dataset or a modern printed edition.
 
 Status: DRAFT. The text has NOT yet been checked word by word against an old
 printed edition. Before release, check every hadith against the chosen edition,
-record that edition here and in README.md, then set "status" to "checked" in
-tool/build_arbaeen.dart. The app shows a draft notice until then.
+record that edition here and in README.md, then add
+"checked": "<edition>" to that hadith in tool/matn/*.json and rebuild. The app
+shows a draft notice on every hadith that is not checked yet.
+
+Self-review (2026-11-04, interim, not a check against an edition):
+all 42 matn and takhreej lines were re-read against an-Nawawi's known
+wording, and scripts checked balanced quotes and missing harakat. No error was
+found that could be fixed with certainty, so nothing was changed. These spots
+must be settled against the printed edition (words differ between editions or
+between the book and the Sahih collections):
+- 23: "ما بين السماوات والأرض" or "ما بين السماء والأرض".
+- 25: tashkeel of "وكل تكبيرة صدقة" and the two after it (genitive with
+  accusative "صدقةً", or nominative "وكلُّ ... صدقةٌ").
+- 29: "ويباعدني من النار" or "ويباعدني عن النار".
+- 42: whether "ولا أبالي" also follows the second "غفرت لك".
+No hadith is marked "checked" by this review.
 
 Titles (the short headings in the index) are ours, not an-Nawawi's.
