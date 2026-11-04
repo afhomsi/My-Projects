@@ -4,11 +4,19 @@
   "indexTitle": "الفهرس",
   "hadithNumber": "الحديث {number}",
   "@hadithNumber": {
-    "placeholders": { "number": { "type": "String" } }
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
   },
   "narratorLabel": "الراوي: {name}",
   "@narratorLabel": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "sourceLabel": "التخريج",
   "sharhTitle": "الشرح المختصر",
@@ -20,6 +28,106 @@
   "loadError": "تعذر تحميل الكتاب.",
   "ahadithCount": "{count} حديثًا",
   "@ahadithCount": {
-    "placeholders": { "count": { "type": "String" } }
-  }
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "planTitle": "خطة الحفظ",
+  "memorizeAction": "احفظ وسمّع",
+  "memorizeTitle": "تسميع الحديث {number}",
+  "@memorizeTitle": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "hideLabel": "أخفِ من الكلمات:",
+  "hideNone": "لا شيء",
+  "hideThird": "الثلث",
+  "hideTwoThirds": "الثلثين",
+  "hideAll": "الكل",
+  "memorizeHelp": "اقرأ الحديث من حفظك، والمس الكلمة المخفية لتظهر.",
+  "firstLetterHint": "أظهر أول حرف",
+  "reshuffle": "أخفِ كلمات أخرى",
+  "revealNextWord": "أظهر الكلمة التالية",
+  "gradeQuestion": "كيف كان تسميعك؟",
+  "gradeAgain": "لم أحفظه",
+  "gradeHard": "بصعوبة",
+  "gradeGood": "أتقنته",
+  "nextReviewIn": "المراجعة القادمة {days, plural, =1{غدًا} =2{بعد يومين} few{بعد {n} أيام} other{بعد {n} يومًا}}",
+  "@nextReviewIn": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "planProgress": "بدأت {started} من {total} · أتقنت {memorized}",
+  "@planProgress": {
+    "placeholders": {
+      "started": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      },
+      "memorized": {
+        "type": "String"
+      }
+    }
+  },
+  "memorizedMeaning": "يعد الحديث متقنًا حين تصل مراجعته إلى مرة كل أسبوعين أو أكثر.",
+  "newHadithTitle": "الحديث الجديد",
+  "startMemorizing": "ابدأ حفظه اليوم",
+  "newHadithIn": "{days, plural, =1{يبدأ غدًا} =2{يبدأ بعد يومين} few{يبدأ بعد {n} أيام} other{يبدأ بعد {n} يومًا}}",
+  "@newHadithIn": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "allStarted": "بدأت حفظ الأحاديث كلها، واصل المراجعة.",
+  "reviewTodayTitle": "مراجعة اليوم ({count})",
+  "@reviewTodayTitle": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "noReviewToday": "لا مراجعة اليوم.",
+  "overdueBy": "{days, plural, =1{متأخر يومًا} =2{متأخر يومين} few{متأخر {n} أيام} other{متأخر {n} يومًا}}",
+  "@overdueBy": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "paceTitle": "حديث جديد كل",
+  "paceDays": "{days, plural, =1{يوم} =2{يومين} few{{n} أيام} other{{n} يومًا}}",
+  "@paceDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "paceWeek": "أسبوع"
 }

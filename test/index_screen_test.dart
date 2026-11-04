@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:arbaeen/app.dart';
 import 'package:arbaeen/data/hadith.dart';
 import 'package:arbaeen/data/hadith_repository.dart';
+import 'package:arbaeen/features/plan/plan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Book _loadBook() => Book.fromJson(
   jsonDecode(File('assets/hadith/arbaeen.json').readAsStringSync())
@@ -15,9 +17,14 @@ Book _loadBook() => Book.fromJson(
 
 Future<void> _pumpApp(WidgetTester tester) async {
   final book = _loadBook();
+  SharedPreferences.setMockInitialValues({});
+  final prefs = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
-      overrides: [bookProvider.overrideWith((ref) async => book)],
+      overrides: [
+        bookProvider.overrideWith((ref) async => book),
+        sharedPreferencesProvider.overrideWithValue(prefs),
+      ],
       child: const ArbaeenApp(),
     ),
   );

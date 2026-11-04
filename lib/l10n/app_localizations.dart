@@ -170,6 +170,180 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'{count} حديثًا'**
   String ahadithCount(String count);
+
+  /// No description provided for @planTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة الحفظ'**
+  String get planTitle;
+
+  /// No description provided for @memorizeAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ وسمّع'**
+  String get memorizeAction;
+
+  /// No description provided for @memorizeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسميع الحديث {number}'**
+  String memorizeTitle(String number);
+
+  /// No description provided for @hideLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفِ من الكلمات:'**
+  String get hideLabel;
+
+  /// No description provided for @hideNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا شيء'**
+  String get hideNone;
+
+  /// No description provided for @hideThird.
+  ///
+  /// In ar, this message translates to:
+  /// **'الثلث'**
+  String get hideThird;
+
+  /// No description provided for @hideTwoThirds.
+  ///
+  /// In ar, this message translates to:
+  /// **'الثلثين'**
+  String get hideTwoThirds;
+
+  /// No description provided for @hideAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get hideAll;
+
+  /// No description provided for @memorizeHelp.
+  ///
+  /// In ar, this message translates to:
+  /// **'اقرأ الحديث من حفظك، والمس الكلمة المخفية لتظهر.'**
+  String get memorizeHelp;
+
+  /// No description provided for @firstLetterHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهر أول حرف'**
+  String get firstLetterHint;
+
+  /// No description provided for @reshuffle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفِ كلمات أخرى'**
+  String get reshuffle;
+
+  /// No description provided for @revealNextWord.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهر الكلمة التالية'**
+  String get revealNextWord;
+
+  /// No description provided for @gradeQuestion.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف كان تسميعك؟'**
+  String get gradeQuestion;
+
+  /// No description provided for @gradeAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم أحفظه'**
+  String get gradeAgain;
+
+  /// No description provided for @gradeHard.
+  ///
+  /// In ar, this message translates to:
+  /// **'بصعوبة'**
+  String get gradeHard;
+
+  /// No description provided for @gradeGood.
+  ///
+  /// In ar, this message translates to:
+  /// **'أتقنته'**
+  String get gradeGood;
+
+  /// No description provided for @nextReviewIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراجعة القادمة {days, plural, =1{غدًا} =2{بعد يومين} few{بعد {n} أيام} other{بعد {n} يومًا}}'**
+  String nextReviewIn(int days, String n);
+
+  /// No description provided for @planProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأت {started} من {total} · أتقنت {memorized}'**
+  String planProgress(String started, String total, String memorized);
+
+  /// No description provided for @memorizedMeaning.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعد الحديث متقنًا حين تصل مراجعته إلى مرة كل أسبوعين أو أكثر.'**
+  String get memorizedMeaning;
+
+  /// No description provided for @newHadithTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحديث الجديد'**
+  String get newHadithTitle;
+
+  /// No description provided for @startMemorizing.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ حفظه اليوم'**
+  String get startMemorizing;
+
+  /// No description provided for @newHadithIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =1{يبدأ غدًا} =2{يبدأ بعد يومين} few{يبدأ بعد {n} أيام} other{يبدأ بعد {n} يومًا}}'**
+  String newHadithIn(int days, String n);
+
+  /// No description provided for @allStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأت حفظ الأحاديث كلها، واصل المراجعة.'**
+  String get allStarted;
+
+  /// No description provided for @reviewTodayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مراجعة اليوم ({count})'**
+  String reviewTodayTitle(String count);
+
+  /// No description provided for @noReviewToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا مراجعة اليوم.'**
+  String get noReviewToday;
+
+  /// No description provided for @overdueBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =1{متأخر يومًا} =2{متأخر يومين} few{متأخر {n} أيام} other{متأخر {n} يومًا}}'**
+  String overdueBy(int days, String n);
+
+  /// No description provided for @paceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حديث جديد كل'**
+  String get paceTitle;
+
+  /// No description provided for @paceDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days, plural, =1{يوم} =2{يومين} few{{n} أيام} other{{n} يومًا}}'**
+  String paceDays(int days, String n);
+
+  /// No description provided for @paceWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوع'**
+  String get paceWeek;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {
