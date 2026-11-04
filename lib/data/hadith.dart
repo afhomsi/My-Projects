@@ -1,16 +1,28 @@
 /// One commentary (sharh) on a hadith.
 class Sharh {
-  const Sharh({required this.author, required this.text, required this.source});
+  const Sharh({
+    required this.author,
+    required this.text,
+    required this.source,
+    this.reviewedBy,
+  });
 
   factory Sharh.fromJson(Map<String, dynamic> json) => Sharh(
     author: json['author'] as String,
     text: json['text'] as String,
     source: json['source'] as String,
+    reviewedBy: json['reviewed'] as String?,
   );
 
   final String author;
   final String text;
   final String source;
+
+  /// Who reviewed this sharh for correctness, or null while it is a draft.
+  final String? reviewedBy;
+
+  /// True once a qualified person has reviewed this sharh.
+  bool get isReviewed => reviewedBy != null;
 }
 
 /// One hadith of the Forty, as written by an-Nawawi.

@@ -11,8 +11,9 @@
     "placeholders": { "name": { "type": "String" } }
   },
   "sourceLabel": "التخريج",
-  "sharhTitle": "الشرح",
+  "sharhTitle": "الشرح المختصر",
   "sharhComingSoon": "الشرح المختصر سيضاف بعد توثيق مصدره وحقوقه.",
+  "sharhDraftNotice": "مسودة: لم يراجع هذا الشرح بعد طالب علم مختص.",
   "previous": "السابق",
   "next": "التالي",
   "draftNotice": "النص مسودة لم تراجع بعد على نسخة مطبوعة.",

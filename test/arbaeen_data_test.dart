@@ -43,6 +43,27 @@ void main() {
     }
   });
 
+  test('every hadith has a short sharh in Arabic', () {
+    final latin = RegExp('[A-Za-z]');
+    for (final h in book.ahadith) {
+      expect(h.shuruh, isNotEmpty, reason: 'sharh of ${h.number}');
+      final text = h.shuruh.first.text;
+      expect(text.trim().length, greaterThan(80), reason: 'sharh ${h.number}');
+      expect(latin.hasMatch(text), isFalse, reason: 'latin ${h.number}');
+    }
+  });
+
+  test('the built asset matches the sharh parts in tool/sharh', () {
+    final parts = {
+      for (final f in Directory('tool/sharh').listSync().whereType<File>())
+        for (final p in jsonDecode(f.readAsStringSync()) as List<dynamic>)
+          (p as Map<String, dynamic>)['number'] as int: p['text'] as String,
+    };
+    for (final h in book.ahadith) {
+      expect(h.shuruh.first.text, parts[h.number], reason: '${h.number}');
+    }
+  });
+
   test('the built asset matches the parts in tool/matn', () {
     final parts =
         Directory('tool/matn')

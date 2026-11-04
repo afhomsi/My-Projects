@@ -33,4 +33,12 @@ void main() {
       isFalse,
     );
   });
+
+  test('a sharh is a draft until it names its reviewer', () {
+    const fields = {'author': 'a', 'text': 't', 'source': 's'};
+    expect(Sharh.fromJson(fields).isReviewed, isFalse);
+    final reviewed = Sharh.fromJson({...fields, 'reviewed': 'r'});
+    expect(reviewed.isReviewed, isTrue);
+    expect(reviewed.reviewedBy, 'r');
+  });
 }

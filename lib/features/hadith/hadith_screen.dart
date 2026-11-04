@@ -129,6 +129,13 @@ class HadithPage extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(sharh.text, style: theme.textTheme.bodyLarge),
                       Text(sharh.source, style: theme.textTheme.bodySmall),
+                      if (!sharh.isReviewed)
+                        Text(
+                          s.sharhDraftNotice,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       const SizedBox(height: 12),
                     ],
                   ],

@@ -63,9 +63,12 @@ numbering of a given edition. So:
 
 - **Matn:** typed by us from an old printed edition and checked by hand.
   Keep it in `assets/hadith/arbaeen.json`. Record the edition used in the README.
-- **Short sharh:** only from classical authors whose text is free (an-Nawawi's
-  own sharh, Ibn Daqiq al-'Eid, Ibn Rajab's Jami' al-'Ulum wal-Hikam), taken
-  from an old edition, not a modern muhaqqaq one.
+- **Short sharh:** either our own fresh wording of meanings well known among
+  the classical commentators (in `tool/sharh/`, see
+  `assets/hadith/SOURCE-sharh.txt`; shown as a draft until a qualified person
+  reviews it), or quoted from classical authors whose text is free
+  (an-Nawawi's own sharh, Ibn Daqiq al-'Eid, Ibn Rajab's Jami' al-'Ulum
+  wal-Hikam), taken from an old edition, not a modern muhaqqaq one.
 - **Needs written permission before use:** Ibn 'Uthaymeen's sharh (rights
   believed to be with the Ibn 'Uthaymeen Charitable Foundation, not yet
   verified), 'Abd al-Karim al-Khudayr (alive), and any modern edition.
