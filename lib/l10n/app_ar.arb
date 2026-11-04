@@ -129,5 +129,48 @@
       }
     }
   },
-  "paceWeek": "أسبوع"
+  "paceWeek": "أسبوع",
+  "listenAction": "استمع",
+  "stopAction": "أوقف",
+  "repeatLabel": "التكرار: {count}",
+  "@repeatLabel": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "repeatTimes": "{count, plural, =1{مرة واحدة} few{{n} مرات} other{{n} مرة}}",
+  "@repeatTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "repeatEndless": "بلا توقف",
+  "repeatRound": "المرة {round} من {total}",
+  "@repeatRound": {
+    "placeholders": {
+      "round": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "repeatRoundEndless": "المرة {round}",
+  "@repeatRoundEndless": {
+    "placeholders": {
+      "round": {
+        "type": "String"
+      }
+    }
+  },
+  "deviceVoiceNotice": "صوت الجهاز مؤقت حتى يتوفر تسجيل مأذون، وقد يخطئ في التشكيل.",
+  "voiceUnavailable": "لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام."
 }

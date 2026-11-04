@@ -12,6 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
+  flutter_tts: ^4.2.5
   intl: any
   shared_preferences: ^2.5.6
 

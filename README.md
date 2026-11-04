@@ -17,6 +17,13 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
 - Memorization plan (خطة الحفظ, from the index): one new hadith every 1, 2,
   3 or 7 days, in order, and spaced review (1, 2, 4, 7, 15, 30, 60, 120 days;
   a hadith counts as memorized from 15 days). Saved on the device.
+- Listen (استمع, under each hadith): plays the hadith 1, 3, 10, 20 or 50
+  times, or without stopping, with a short pause between repetitions. The
+  count is saved. For now the device text-to-speech voice reads the matn
+  (offline when an Arabic voice is installed); it is a stopgap that can
+  mispronounce tashkeel, and the screen says so while it plays. A recording
+  with written permission will replace it through the `HadithVoice`
+  interface in `lib/audio/`.
 
 ## Content sources
 
@@ -24,7 +31,7 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
 | --- | --- | --- | --- |
 | Matn and takhreej of the 42 ahadith | Typed by hand; an-Nawawi's text | Public domain | `assets/hadith/SOURCE-arbaeen.txt` |
 | Sharh | none yet | — | — |
-| Audio | none yet | — | — |
+| Audio | Device text-to-speech (stopgap; no recording bundled) | No licence needed: the device reads our text | `lib/audio/device_speech_voice.dart` |
 | Fonts | system fonts only | — | — |
 
 **Printed edition used for checking: not yet chosen.** The matn is a draft
