@@ -187,4 +187,48 @@ class SAr extends S {
 
   @override
   String get paceWeek => 'أسبوع';
+
+  @override
+  String get listenAction => 'استمع';
+
+  @override
+  String get stopAction => 'أوقف';
+
+  @override
+  String repeatLabel(String count) {
+    return 'التكرار: $count';
+  }
+
+  @override
+  String repeatTimes(int count, String n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$n مرة',
+      few: '$n مرات',
+      one: 'مرة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get repeatEndless => 'بلا توقف';
+
+  @override
+  String repeatRound(String round, String total) {
+    return 'المرة $round من $total';
+  }
+
+  @override
+  String repeatRoundEndless(String round) {
+    return 'المرة $round';
+  }
+
+  @override
+  String get deviceVoiceNotice =>
+      'صوت الجهاز مؤقت حتى يتوفر تسجيل مأذون، وقد يخطئ في التشكيل.';
+
+  @override
+  String get voiceUnavailable =>
+      'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.';
 }

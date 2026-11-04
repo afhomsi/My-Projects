@@ -344,6 +344,60 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'أسبوع'**
   String get paceWeek;
+
+  /// No description provided for @listenAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'استمع'**
+  String get listenAction;
+
+  /// No description provided for @stopAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقف'**
+  String get stopAction;
+
+  /// No description provided for @repeatLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكرار: {count}'**
+  String repeatLabel(String count);
+
+  /// No description provided for @repeatTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة واحدة} few{{n} مرات} other{{n} مرة}}'**
+  String repeatTimes(int count, String n);
+
+  /// No description provided for @repeatEndless.
+  ///
+  /// In ar, this message translates to:
+  /// **'بلا توقف'**
+  String get repeatEndless;
+
+  /// No description provided for @repeatRound.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرة {round} من {total}'**
+  String repeatRound(String round, String total);
+
+  /// No description provided for @repeatRoundEndless.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرة {round}'**
+  String repeatRoundEndless(String round);
+
+  /// No description provided for @deviceVoiceNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'صوت الجهاز مؤقت حتى يتوفر تسجيل مأذون، وقد يخطئ في التشكيل.'**
+  String get deviceVoiceNotice;
+
+  /// No description provided for @voiceUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.'**
+  String get voiceUnavailable;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

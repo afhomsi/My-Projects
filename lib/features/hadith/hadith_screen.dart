@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../audio/listen_controller.dart';
 import '../../data/hadith.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 import '../arabic_numbers.dart';
+import '../audio/listen_bar.dart';
 import '../memorize/memorize_screen.dart';
 
 /// One page per hadith. Swipe, or use the buttons, to move between ahadith.
-class HadithScreen extends StatefulWidget {
+class HadithScreen extends ConsumerStatefulWidget {
   const HadithScreen({super.key, required this.book, this.initialIndex = 0});
 
   final Book book;
   final int initialIndex;
 
   @override
-  State<HadithScreen> createState() => _HadithScreenState();
+  ConsumerState<HadithScreen> createState() => _HadithScreenState();
 }
 
-class _HadithScreenState extends State<HadithScreen> {
+class _HadithScreenState extends ConsumerState<HadithScreen> {
   late final PageController _controller = PageController(
     initialPage: widget.initialIndex,
   );
@@ -48,38 +51,51 @@ class _HadithScreenState extends State<HadithScreen> {
             key: const ValueKey('open-memorize'),
             tooltip: s.memorizeAction,
             icon: const Icon(Icons.visibility_off_outlined),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => MemorizeScreen(hadith: current),
-              ),
-            ),
+            onPressed: () {
+              ref.read(listenProvider.notifier).stop();
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => MemorizeScreen(hadith: current),
+                ),
+              );
+            },
           ),
         ],
       ),
       body: PageView.builder(
         controller: _controller,
         itemCount: ahadith.length,
-        onPageChanged: (i) => setState(() => _index = i),
+        onPageChanged: (i) {
+          // Never keep reading a hadith that is no longer on screen.
+          ref.read(listenProvider.notifier).stop();
+          setState(() => _index = i);
+        },
         itemBuilder: (context, i) => HadithPage(hadith: ahadith[i]),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              TextButton.icon(
-                onPressed: _index > 0 ? () => _goTo(_index - 1) : null,
-                icon: const Icon(Icons.chevron_left),
-                label: Text(s.previous),
-              ),
-              const Spacer(),
-              TextButton.icon(
-                onPressed: _index < ahadith.length - 1
-                    ? () => _goTo(_index + 1)
-                    : null,
-                icon: const Icon(Icons.chevron_right),
-                label: Text(s.next),
-                iconAlignment: IconAlignment.end,
+              ListenBar(hadith: current),
+              Row(
+                children: [
+                  TextButton.icon(
+                    onPressed: _index > 0 ? () => _goTo(_index - 1) : null,
+                    icon: const Icon(Icons.chevron_left),
+                    label: Text(s.previous),
+                  ),
+                  const Spacer(),
+                  TextButton.icon(
+                    onPressed: _index < ahadith.length - 1
+                        ? () => _goTo(_index + 1)
+                        : null,
+                    icon: const Icon(Icons.chevron_right),
+                    label: Text(s.next),
+                    iconAlignment: IconAlignment.end,
+                  ),
+                ],
               ),
             ],
           ),
