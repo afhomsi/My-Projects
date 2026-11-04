@@ -19,11 +19,10 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
   a hadith counts as memorized from 15 days). Saved on the device.
 - Listen (استمع, under each hadith): plays the hadith 1, 3, 10, 20 or 50
   times, or without stopping, with a short pause between repetitions. The
-  count is saved. For now the device text-to-speech voice reads the matn
-  (offline when an Arabic voice is installed); it is a stopgap that can
-  mispronounce tashkeel, and the screen says so while it plays. A recording
-  with written permission will replace it through the `HadithVoice`
-  interface in `lib/audio/`.
+  count is saved. It plays the bundled recording `assets/audio/NN.mp3` and
+  appears only for ahadith that have one. No recording is bundled yet: they
+  are added once the reciter gives written permission
+  (see `assets/audio/README.md`).
 - Tasmee' by voice (سمّع بصوتك, the microphone on a hadith page or on the
   memorize screen): recite the hadith from memory; each word shows as it is
   said, wrong, left-out and added words show in red and in a list, a hint
@@ -44,7 +43,7 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
 | --- | --- | --- | --- |
 | Matn and takhreej of the 42 ahadith | Typed by hand; an-Nawawi's text | Public domain | `assets/hadith/SOURCE-arbaeen.txt` |
 | Sharh | none yet | — | — |
-| Audio | Device text-to-speech (stopgap; no recording bundled) | No licence needed: the device reads our text | `lib/audio/device_speech_voice.dart` |
+| Audio | none yet (waiting for the reciter's written permission) | — | `assets/audio/README.md` |
 | Fonts | system fonts only | — | — |
 | Speech recognition | The device's recognizer through `speech_to_text` (BSD-3-Clause); no model or audio bundled | No content licence needed | `lib/recitation/speech_listener.dart` |
 

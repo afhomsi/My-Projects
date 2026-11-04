@@ -90,7 +90,13 @@ No recording of the Forty with an explicit open licence was found
    hadith (about 45 minutes) and gives written permission.
 2. Written permission from Dr. Yusuf al-'Aqil or Hamad ad-Duraihim (or their
    publisher); we then cut the file per hadith ourselves.
-3. Device text-to-speech as a stopgap only (weak on tashkeel).
+3. Device text-to-speech as a stopgap only (weak on tashkeel). Tried in
+   PR #6 and removed: the owner did not like it.
+
+Current plan (2026-11-04): the owner is asking for written permission to use
+the recitation in the "الأربعون النووية مع الشرح" app (com.reda.nawawiforty).
+That app is under "Do not use" until the permission names the reciter and is
+saved as `assets/audio/LICENSE-<reciter>.txt`; only then add the files.
 
 Until one of these exists, the audio code is built and tested with a fake
 player, and no recording is bundled.

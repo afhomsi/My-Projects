@@ -225,12 +225,7 @@ class SAr extends S {
   }
 
   @override
-  String get deviceVoiceNotice =>
-      'صوت الجهاز مؤقت حتى يتوفر تسجيل مأذون، وقد يخطئ في التشكيل.';
-
-  @override
-  String get voiceUnavailable =>
-      'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.';
+  String get voiceUnavailable => 'تعذر تشغيل التسجيل.';
 
   @override
   String get reciteAction => 'سمّع بصوتك';
