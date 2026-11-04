@@ -11,6 +11,12 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
   sharh section (empty until a sharh with clear rights is added).
 - Swipe or previous/next buttons between ahadith. Right-to-left, Arabic UI,
   light and night themes (follows the system).
+- Memorize (تسميع): from a hadith page, hide none, a third, two thirds or all
+  of the words; tap a hidden word or "show next word" to peek, optionally
+  show each hidden word's first letter, then grade the recitation.
+- Memorization plan (خطة الحفظ, from the index): one new hadith every 1, 2,
+  3 or 7 days, in order, and spaced review (1, 2, 4, 7, 15, 30, 60, 120 days;
+  a hadith counts as memorized from 15 days). Saved on the device.
 
 ## Content sources
 

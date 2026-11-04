@@ -4,6 +4,7 @@ import '../../data/hadith.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 import '../arabic_numbers.dart';
+import '../memorize/memorize_screen.dart';
 
 /// One page per hadith. Swipe, or use the buttons, to move between ahadith.
 class HadithScreen extends StatefulWidget {
@@ -40,7 +41,21 @@ class _HadithScreenState extends State<HadithScreen> {
     final ahadith = widget.book.ahadith;
     final current = ahadith[_index];
     return Scaffold(
-      appBar: AppBar(title: Text(s.hadithNumber(arabicNumber(current.number)))),
+      appBar: AppBar(
+        title: Text(s.hadithNumber(arabicNumber(current.number))),
+        actions: [
+          IconButton(
+            key: const ValueKey('open-memorize'),
+            tooltip: s.memorizeAction,
+            icon: const Icon(Icons.visibility_off_outlined),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => MemorizeScreen(hadith: current),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: PageView.builder(
         controller: _controller,
         itemCount: ahadith.length,

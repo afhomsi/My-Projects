@@ -6,6 +6,7 @@ import '../../data/hadith_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../arabic_numbers.dart';
 import '../hadith/hadith_screen.dart';
+import '../plan/plan_screen.dart';
 
 /// The table of contents: the book's title, then the 42 ahadith in order.
 class IndexScreen extends ConsumerWidget {
@@ -16,7 +17,19 @@ class IndexScreen extends ConsumerWidget {
     final s = S.of(context);
     final book = ref.watch(bookProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(s.appTitle)),
+      appBar: AppBar(
+        title: Text(s.appTitle),
+        actions: [
+          IconButton(
+            key: const ValueKey('open-plan'),
+            tooltip: s.planTitle,
+            icon: const Icon(Icons.event_note_outlined),
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute<void>(builder: (_) => const PlanScreen())),
+          ),
+        ],
+      ),
       body: book.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) => Center(child: Text(s.loadError)),
