@@ -8,6 +8,7 @@ import '../../theme/app_theme.dart';
 import '../arabic_numbers.dart';
 import '../plan/plan_controller.dart';
 import '../plan/review_schedule.dart';
+import '../recitation/recite_screen.dart';
 import 'word_hiding.dart';
 
 /// Recite a hadith from memory: words are hidden, tap one to peek at it,
@@ -82,6 +83,22 @@ class _MemorizeScreenState extends ConsumerState<MemorizeScreen> {
       appBar: AppBar(
         title: Text(s.memorizeTitle(arabicNumber(widget.hadith.number))),
         actions: [
+          IconButton(
+            key: const ValueKey('memorize-open-recite'),
+            tooltip: s.reciteAction,
+            icon: const Icon(Icons.mic_none),
+            onPressed: () async {
+              final card = await Navigator.of(context).push<ReviewCard>(
+                MaterialPageRoute(
+                  builder: (_) => ReciteScreen(hadith: widget.hadith),
+                ),
+              );
+              // Graded by voice: the memorize screen is done too.
+              if (card != null && context.mounted) {
+                Navigator.of(context).pop(card);
+              }
+            },
+          ),
           IconButton(
             tooltip: s.firstLetterHint,
             isSelected: _hints,

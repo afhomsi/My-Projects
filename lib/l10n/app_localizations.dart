@@ -398,6 +398,180 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'لا يوجد صوت عربي على هذا الجهاز. ثبّته من إعدادات تحويل النص إلى كلام.'**
   String get voiceUnavailable;
+
+  /// No description provided for @reciteAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع بصوتك'**
+  String get reciteAction;
+
+  /// No description provided for @reciteTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسميع بالصوت: الحديث {number}'**
+  String reciteTitle(String number);
+
+  /// No description provided for @reciteHelp.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط على الميكروفون واقرأ الحديث من حفظك. تظهر كل كلمة حين تقولها، ويظهر الخطأ بالأحمر.'**
+  String get reciteHelp;
+
+  /// No description provided for @reciteStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ التسميع'**
+  String get reciteStart;
+
+  /// No description provided for @reciteContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'تابع'**
+  String get reciteContinue;
+
+  /// No description provided for @reciteStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوقف'**
+  String get reciteStop;
+
+  /// No description provided for @reciteRestart.
+  ///
+  /// In ar, this message translates to:
+  /// **'من البداية'**
+  String get reciteRestart;
+
+  /// No description provided for @reciteShowText.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهر النص'**
+  String get reciteShowText;
+
+  /// No description provided for @reciteHeard.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمعت: {text}'**
+  String reciteHeard(String text);
+
+  /// No description provided for @reciteProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأت {done} من {total}'**
+  String reciteProgress(String done, String total);
+
+  /// No description provided for @reciteMistakes.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأخطاء'**
+  String get reciteMistakes;
+
+  /// No description provided for @mistakeWrong.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمعت «{heard}» والصواب «{expected}»'**
+  String mistakeWrong(String heard, String expected);
+
+  /// No description provided for @mistakeSkippedWord.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيت كلمة «{expected}»'**
+  String mistakeSkippedWord(String expected);
+
+  /// No description provided for @mistakeSkippedPart.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسيت جملة: «{expected}»'**
+  String mistakeSkippedPart(String expected);
+
+  /// No description provided for @mistakeExtra.
+  ///
+  /// In ar, this message translates to:
+  /// **'زدت «{heard}» قبل «{expected}»'**
+  String mistakeExtra(String heard, String expected);
+
+  /// No description provided for @mistakeExtraAtEnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'زدت بعد النهاية: «{heard}»'**
+  String mistakeExtraAtEnd(String heard);
+
+  /// No description provided for @mistakeHarakat.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطأ في الحركة: سمعت «{heard}» والصواب «{expected}»'**
+  String mistakeHarakat(String heard, String expected);
+
+  /// No description provided for @reciteDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =0{أحسنت! سمّعت الحديث كاملًا دون خطأ.} =1{سمّعت الحديث كاملًا، وفيه خطأ واحد.} =2{سمّعت الحديث كاملًا، وفيه خطآن.} few{سمّعت الحديث كاملًا، وفيه {n} أخطاء.} other{سمّعت الحديث كاملًا، وفيه {n} خطأ.}}'**
+  String reciteDone(int count, String n);
+
+  /// No description provided for @recitePrivacyDevice.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُتعرَّف على صوتك في هاتفك، ولا يُرسل إلى أي مكان.'**
+  String get recitePrivacyDevice;
+
+  /// No description provided for @recitePrivacyOnline.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمحت بالتعرف عبر الإنترنت: يُرسل صوتك إلى خدمة التعرف على الكلام في جهازك.'**
+  String get recitePrivacyOnline;
+
+  /// No description provided for @recitePrivacyWeb.
+  ///
+  /// In ar, this message translates to:
+  /// **'في المتصفح يُرسل صوتك إلى خدمة التعرف على الكلام في المتصفح.'**
+  String get recitePrivacyWeb;
+
+  /// No description provided for @reciteDeviceOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'على الهاتف فقط'**
+  String get reciteDeviceOnly;
+
+  /// No description provided for @reciteAllowOnline.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسمح بالتعرف عبر الإنترنت'**
+  String get reciteAllowOnline;
+
+  /// No description provided for @reciteErrorOffline.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يستطيع هاتفك التعرف على العربية دون إنترنت. ثبّت اللغة العربية للتعرف على الكلام دون اتصال من إعدادات الهاتف، أو اسمح بالتعرف عبر الإنترنت.'**
+  String get reciteErrorOffline;
+
+  /// No description provided for @reciteErrorNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'التعرف على الصوت يحتاج إلى اتصال بالإنترنت.'**
+  String get reciteErrorNetwork;
+
+  /// No description provided for @reciteErrorPermission.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُسمح باستخدام الميكروفون. اسمح به من إعدادات الهاتف ثم حاول.'**
+  String get reciteErrorPermission;
+
+  /// No description provided for @reciteErrorNoMic.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُعثر على ميكروفون.'**
+  String get reciteErrorNoMic;
+
+  /// No description provided for @reciteErrorUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن التعرف على الصوت على هذا الجهاز، أو لم يُسمح باستخدام الميكروفون.'**
+  String get reciteErrorUnavailable;
+
+  /// No description provided for @reciteErrorOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ في الاستماع. حاول مرة أخرى.'**
+  String get reciteErrorOther;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

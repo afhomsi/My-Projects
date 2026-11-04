@@ -24,6 +24,19 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
   mispronounce tashkeel, and the screen says so while it plays. A recording
   with written permission will replace it through the `HadithVoice`
   interface in `lib/audio/`.
+- Tasmee' by voice (سمّع بصوتك, the microphone on a hadith page or on the
+  memorize screen): recite the hadith from memory; each word shows as it is
+  said, wrong, left-out and added words show in red and in a list, a hint
+  shows the next word, and the result suggests a grade for the plan. The
+  sign ﷺ may be said as "صلى الله عليه وسلم" or left out. The engine in
+  `lib/recitation/` is ported from the Quran app (matcher, Arabic
+  normalizer, harakat, restarts of the recognizer). Recognition uses the
+  phone's own recognizer (`speech_to_text`), asked to work on the device so
+  the voice does not leave the phone (Android 12+ and iOS, once the Arabic
+  language for offline speech is installed). If the device cannot, the
+  screen says so and offers recognition over the internet, which the user
+  must allow; the choice is saved and can be undone from the same screen.
+  In Chrome the browser always recognizes online.
 
 ## Content sources
 
@@ -33,6 +46,7 @@ Sister app of "حفظ — Hifz". See `CLAUDE.md` for the scope and the rules.
 | Sharh | none yet | — | — |
 | Audio | Device text-to-speech (stopgap; no recording bundled) | No licence needed: the device reads our text | `lib/audio/device_speech_voice.dart` |
 | Fonts | system fonts only | — | — |
+| Speech recognition | The device's recognizer through `speech_to_text` (BSD-3-Clause); no model or audio bundled | No content licence needed | `lib/recitation/speech_listener.dart` |
 
 **Printed edition used for checking: not yet chosen.** The matn is a draft
 until it is checked against an old printed edition (see
