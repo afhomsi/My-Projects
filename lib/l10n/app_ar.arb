@@ -331,5 +331,10 @@
   },
   "quizGaveUp": "أظهرت الجواب",
   "quizAgain": "اختبار آخر",
-  "quizDone": "تم"
+  "quizDone": "تم",
+  "reciteChooseTitle": "ماذا تريد أن تسمّع؟",
+  "reciteScopeFull": "الحديث كاملًا مع السند",
+  "reciteScopeFullHelp": "من «عن ...» إلى آخر الحديث.",
+  "reciteScopeProphet": "كلام رسول الله ﷺ فقط",
+  "reciteScopeProphetHelp": "ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك."
 }

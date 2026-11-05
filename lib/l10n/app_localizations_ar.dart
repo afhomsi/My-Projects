@@ -414,4 +414,20 @@ class SAr extends S {
 
   @override
   String get quizDone => 'تم';
+
+  @override
+  String get reciteChooseTitle => 'ماذا تريد أن تسمّع؟';
+
+  @override
+  String get reciteScopeFull => 'الحديث كاملًا مع السند';
+
+  @override
+  String get reciteScopeFullHelp => 'من «عن ...» إلى آخر الحديث.';
+
+  @override
+  String get reciteScopeProphet => 'كلام رسول الله ﷺ فقط';
+
+  @override
+  String get reciteScopeProphetHelp =>
+      'ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك.';
 }

@@ -662,6 +662,36 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'تم'**
   String get quizDone;
+
+  /// No description provided for @reciteChooseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا تريد أن تسمّع؟'**
+  String get reciteChooseTitle;
+
+  /// No description provided for @reciteScopeFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحديث كاملًا مع السند'**
+  String get reciteScopeFull;
+
+  /// No description provided for @reciteScopeFullHelp.
+  ///
+  /// In ar, this message translates to:
+  /// **'من «عن ...» إلى آخر الحديث.'**
+  String get reciteScopeFullHelp;
+
+  /// No description provided for @reciteScopeProphet.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلام رسول الله ﷺ فقط'**
+  String get reciteScopeProphet;
+
+  /// No description provided for @reciteScopeProphetHelp.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك.'**
+  String get reciteScopeProphetHelp;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {
