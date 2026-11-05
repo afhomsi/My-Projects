@@ -21,12 +21,39 @@ Grade suggestedGrade(int mistakes) => switch (mistakes) {
   _ => Grade.again,
 };
 
+/// What [m] says, in words.
+String mistakeText(S s, Mistake m) => switch (m.kind) {
+  MistakeKind.wrong => s.mistakeWrong(m.heard ?? '', m.expected),
+  MistakeKind.skippedWord => s.mistakeSkippedWord(m.expected),
+  MistakeKind.skippedPart => s.mistakeSkippedPart(m.expected),
+  MistakeKind.extra => s.mistakeExtra(m.heard ?? '', m.expected),
+  MistakeKind.extraAtEnd => s.mistakeExtraAtEnd(m.heard ?? ''),
+  MistakeKind.harakat => s.mistakeHarakat(m.heard ?? '', m.expected),
+};
+
+String listenErrorText(S s, ListenError error, {required bool online}) =>
+    switch (error) {
+      ListenError.needsNetwork =>
+        online ? s.reciteErrorNetwork : s.reciteErrorOffline,
+      ListenError.permission => s.reciteErrorPermission,
+      ListenError.noMicrophone => s.reciteErrorNoMic,
+      ListenError.unavailable => s.reciteErrorUnavailable,
+      ListenError.other => s.reciteErrorOther,
+    };
+
 /// Tasmee' by voice: the reciter says the hadith from memory, each word
 /// shows as it is said, and mistakes show in red and in a list.
 class ReciteScreen extends ConsumerStatefulWidget {
-  const ReciteScreen({super.key, required this.hadith});
+  const ReciteScreen({
+    super.key,
+    required this.hadith,
+    this.scope = ReciteScope.full,
+  });
 
   final Hadith hadith;
+
+  /// The whole hadith, or only the Prophet's words ﷺ.
+  final ReciteScope scope;
 
   @override
   ConsumerState<ReciteScreen> createState() => _ReciteScreenState();
@@ -34,7 +61,10 @@ class ReciteScreen extends ConsumerStatefulWidget {
 
 class _ReciteScreenState extends ConsumerState<ReciteScreen> {
   late final List<MatnWord> _tokens = splitMatn(widget.hadith.matn);
-  late final List<ExpectedWord> _expected = wordsOfMatn(widget.hadith.matn);
+  late final List<ExpectedWord> _expected = wordsOfMatn(
+    widget.hadith.matn,
+    scope: widget.scope,
+  );
 
   /// For each word of the matn, its index in [_expected], or null for the
   /// sign ﷺ and lone punctuation, which always show.
@@ -100,24 +130,6 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
     Navigator.of(context).pop(card);
   }
 
-  String _mistakeText(S s, Mistake m) => switch (m.kind) {
-    MistakeKind.wrong => s.mistakeWrong(m.heard ?? '', m.expected),
-    MistakeKind.skippedWord => s.mistakeSkippedWord(m.expected),
-    MistakeKind.skippedPart => s.mistakeSkippedPart(m.expected),
-    MistakeKind.extra => s.mistakeExtra(m.heard ?? '', m.expected),
-    MistakeKind.extraAtEnd => s.mistakeExtraAtEnd(m.heard ?? ''),
-    MistakeKind.harakat => s.mistakeHarakat(m.heard ?? '', m.expected),
-  };
-
-  String _errorText(S s, ListenError error, bool online) => switch (error) {
-    ListenError.needsNetwork =>
-      online ? s.reciteErrorNetwork : s.reciteErrorOffline,
-    ListenError.permission => s.reciteErrorPermission,
-    ListenError.noMicrophone => s.reciteErrorNoMic,
-    ListenError.unavailable => s.reciteErrorUnavailable,
-    ListenError.other => s.reciteErrorOther,
-  };
-
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
@@ -157,6 +169,15 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
             ),
             textAlign: TextAlign.center,
           ),
+          const SizedBox(height: 4),
+          Text(
+            widget.scope == ReciteScope.full
+                ? s.reciteScopeFull
+                : s.reciteScopeProphet,
+            key: const ValueKey('recite-scope'),
+            style: theme.textTheme.titleSmall,
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 8),
           Text(
             s.reciteHelp,
@@ -166,12 +187,13 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-          _RecitedMatn(
+          RecitedMatn(
             tokens: _tokens,
             indexOfToken: _indexOfToken,
             result: result,
             hints: session.hints,
             showText: _showText,
+            muteUnrecited: widget.scope == ReciteScope.prophetWords,
           ),
           if (mistakes.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -186,7 +208,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
                       ? Colors.orange.shade800
                       : theme.colorScheme.error,
                 ),
-                title: Text(_mistakeText(s, m)),
+                title: Text(mistakeText(s, m)),
               ),
           ],
         ],
@@ -225,7 +247,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
                     child: Column(
                       children: [
                         Text(
-                          _errorText(s, error, online || kIsWeb),
+                          listenErrorText(s, error, online: online || kIsWeb),
                           style: TextStyle(
                             color: theme.colorScheme.onErrorContainer,
                           ),
@@ -300,7 +322,7 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
                 ],
               ),
               const SizedBox(height: 4),
-              _PrivacyLine(
+              PrivacyLine(
                 online: online,
                 onDeviceOnly: session.isListening ? null : _deviceOnly,
               ),
@@ -314,8 +336,12 @@ class _ReciteScreenState extends ConsumerState<ReciteScreen> {
 
 /// Says where the voice goes, and lets the user go back to recognition on
 /// the device after allowing the internet.
-class _PrivacyLine extends StatelessWidget {
-  const _PrivacyLine({required this.online, required this.onDeviceOnly});
+class PrivacyLine extends StatelessWidget {
+  const PrivacyLine({
+    super.key,
+    required this.online,
+    required this.onDeviceOnly,
+  });
 
   final bool online;
   final VoidCallback? onDeviceOnly;
@@ -385,14 +411,27 @@ class _GradeRow extends StatelessWidget {
 /// The matn as recited so far: words said show, words to come are hidden
 /// (keeping their width, so the text does not jump), and mistakes show in
 /// red. With [showText] the words to come show faded, to read along.
-class _RecitedMatn extends StatelessWidget {
-  const _RecitedMatn({
+class RecitedMatn extends StatelessWidget {
+  const RecitedMatn({
+    super.key,
     required this.tokens,
     required this.indexOfToken,
     required this.result,
     required this.hints,
     required this.showText,
+    this.from = 0,
+    this.to,
+    this.muteUnrecited = false,
   });
+
+  /// Shows the words not to recite (the narration around the Prophet's
+  /// words) muted, as a cue.
+  final bool muteUnrecited;
+
+  /// Only the words of the matn from [from] up to, not including, [to]
+  /// show, as for a question of the short test.
+  final int from;
+  final int? to;
 
   final List<MatnWord> tokens;
   final List<int?> indexOfToken;
@@ -420,14 +459,18 @@ class _RecitedMatn extends StatelessWidget {
     );
     final harakatStyle = style.copyWith(color: Colors.orange.shade800);
     final hintStyle = style.copyWith(color: scheme.primary);
+    final muted = style.copyWith(
+      color: scheme.onSurfaceVariant,
+      fontSize: style.fontSize! * 0.85,
+    );
     final spans = <InlineSpan>[];
-    for (var k = 0; k < tokens.length; k++) {
+    for (var k = from; k < (to ?? tokens.length); k++) {
       final t = tokens[k];
-      if (k > 0) spans.add(const TextSpan(text: ' '));
+      if (k > from) spans.add(const TextSpan(text: ' '));
       spans.add(TextSpan(text: t.prefix));
       final i = indexOfToken[k];
       if (i == null) {
-        spans.add(TextSpan(text: t.core));
+        spans.add(TextSpan(text: t.core, style: muteUnrecited ? muted : null));
       } else {
         final w = result.words[i];
         final TextStyle? wordStyle;
@@ -449,7 +492,57 @@ class _RecitedMatn extends StatelessWidget {
     return Text.rich(
       TextSpan(style: style, children: spans),
       textAlign: TextAlign.justify,
-      key: const ValueKey('recited-matn'),
+      key: key ?? const ValueKey('recited-matn'),
     );
   }
+}
+
+/// Asks whether to recite the whole hadith or only the Prophet's words ﷺ,
+/// then opens the tasmee' screen. Returns the review card when graded.
+Future<ReviewCard?> openRecite(BuildContext context, Hadith hadith) async {
+  var scope = ReciteScope.full;
+  if (hasProphetWords(hadith.matn)) {
+    final chosen = await showModalBottomSheet<ReciteScope>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) {
+        final s = S.of(context);
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                s.reciteChooseTitle,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              ListTile(
+                key: const ValueKey('recite-choose-full'),
+                leading: const Icon(Icons.menu_book_outlined),
+                title: Text(s.reciteScopeFull),
+                subtitle: Text(s.reciteScopeFullHelp),
+                onTap: () => Navigator.of(context).pop(ReciteScope.full),
+              ),
+              ListTile(
+                key: const ValueKey('recite-choose-prophet'),
+                leading: const Icon(Icons.format_quote_outlined),
+                title: Text(s.reciteScopeProphet),
+                subtitle: Text(s.reciteScopeProphetHelp),
+                onTap: () =>
+                    Navigator.of(context).pop(ReciteScope.prophetWords),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        );
+      },
+    );
+    if (chosen == null || !context.mounted) return null;
+    scope = chosen;
+  }
+  return Navigator.of(context).push<ReviewCard>(
+    MaterialPageRoute(
+      builder: (_) => ReciteScreen(hadith: hadith, scope: scope),
+    ),
+  );
 }

@@ -88,11 +88,7 @@ class _MemorizeScreenState extends ConsumerState<MemorizeScreen> {
             tooltip: s.reciteAction,
             icon: const Icon(Icons.mic_none),
             onPressed: () async {
-              final card = await Navigator.of(context).push<ReviewCard>(
-                MaterialPageRoute(
-                  builder: (_) => ReciteScreen(hadith: widget.hadith),
-                ),
-              );
+              final card = await openRecite(context, widget.hadith);
               // Graded by voice: the memorize screen is done too.
               if (card != null && context.mounted) {
                 Navigator.of(context).pop(card);

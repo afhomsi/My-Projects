@@ -285,5 +285,56 @@
   "reciteErrorPermission": "لم يُسمح باستخدام الميكروفون. اسمح به من إعدادات الهاتف ثم حاول.",
   "reciteErrorNoMic": "لم يُعثر على ميكروفون.",
   "reciteErrorUnavailable": "لا يمكن التعرف على الصوت على هذا الجهاز، أو لم يُسمح باستخدام الميكروفون.",
-  "reciteErrorOther": "حدث خطأ في الاستماع. حاول مرة أخرى."
+  "reciteErrorOther": "حدث خطأ في الاستماع. حاول مرة أخرى.",
+  "quizAction": "اختبار قصير",
+  "quizHelp": "ثلاثة أسئلة من الأحاديث التي بدأت حفظها: تكمل كل حديث بصوتك من الموضع المعروض.",
+  "quizNeedsPlan": "ابدأ حفظ حديث في الخطة ليُفتح الاختبار.",
+  "quizTitle": "اختبار قصير",
+  "quizQuestion": "السؤال {n} من {total}",
+  "@quizQuestion": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quizFromStart": "اقرأ الحديث من أوله:",
+  "quizGoOn": "أكمل بعد قوله:",
+  "quizShowAnswer": "أظهر الجواب",
+  "quizNext": "السؤال التالي",
+  "quizFinish": "النتيجة",
+  "quizResultTitle": "نتيجة الاختبار",
+  "quizScore": "أجبت عن {right} من {total} دون خطأ",
+  "@quizScore": {
+    "placeholders": {
+      "right": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quizMistakes": "{count, plural, =0{دون خطأ} =1{خطأ واحد} =2{خطآن} few{{n} أخطاء} other{{n} خطأ}}",
+  "@quizMistakes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "quizGaveUp": "أظهرت الجواب",
+  "quizAgain": "اختبار آخر",
+  "quizDone": "تم",
+  "reciteChooseTitle": "ماذا تريد أن تسمّع؟",
+  "reciteScopeFull": "الحديث كاملًا مع السند",
+  "reciteScopeFullHelp": "من «عن ...» إلى آخر الحديث.",
+  "reciteScopeProphet": "كلام رسول الله ﷺ فقط",
+  "reciteScopeProphetHelp": "ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك."
 }

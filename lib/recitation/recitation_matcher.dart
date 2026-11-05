@@ -33,6 +33,10 @@ enum WordKind {
   /// "صلى الله عليه وسلم", written ﷺ in the matn. Saying it is good but
   /// leaving it out is not a mistake, and the sign itself stays shown.
   salawat,
+
+  /// A word shown as the cue of a test question, before the words to
+  /// recite: the reciter may say it again first, or not.
+  cue,
 }
 
 /// One word to recite and how it was recited.
@@ -151,11 +155,30 @@ final _pauseMark = RegExp('[.،,:؛;؟?!»﴾)]\$');
 /// mostly opens the words quoted after «قال».
 final _partEnd = RegExp('[.؛;؟?!]["»﴾)]*\$');
 
+/// How much of a hadith to recite.
+enum ReciteScope {
+  /// The whole text, with the chain and the narrator's words.
+  full,
+
+  /// Only the Prophet's words ﷺ: what the matn quotes between « and ».
+  prophetWords,
+}
+
+/// Whether [matn] quotes the Prophet's words between « and », so that
+/// [ReciteScope.prophetWords] has something to recite.
+bool hasProphetWords(String matn) => matn.contains('«');
+
 /// The words of [matn] to recite, in reading order, with the sign ﷺ said
-/// as optional words.
-List<ExpectedWord> wordsOfMatn(String matn) {
+/// as optional words. With [ReciteScope.prophetWords] only the words
+/// quoted between « and » are recited; the narration around them stays
+/// out (the screen shows it as a cue).
+List<ExpectedWord> wordsOfMatn(
+  String matn, {
+  ReciteScope scope = ReciteScope.full,
+}) {
   final words = <ExpectedWord>[];
   var part = 0;
+  var depth = 0;
   final tokens = [
     for (final t in matn.split(RegExp(r'\s+')))
       if (t.isNotEmpty) t,
@@ -163,16 +186,27 @@ List<ExpectedWord> wordsOfMatn(String matn) {
   for (var k = 0; k < tokens.length; k++) {
     final t = tokens[k];
     final last = k == tokens.length - 1;
+    final quoted = depth > 0 || t.contains('«');
+    depth += '«'.allMatches(t).length - '»'.allMatches(t).length;
+    if (scope == ReciteScope.prophetWords && !quoted) continue;
+    // The end of a quote is the end of a part, as the narration that
+    // follows is left out.
+    final endsQuote = scope == ReciteScope.prophetWords && depth <= 0;
     if (t.contains('ﷺ')) {
       for (final w in salawatWords) {
         words.add(ExpectedWord(part, w, kind: WordKind.salawat, token: k));
       }
     } else if (normalizeWord(t).isNotEmpty) {
       words.add(
-        ExpectedWord(part, t, pause: last || _pauseMark.hasMatch(t), token: k),
+        ExpectedWord(
+          part,
+          t,
+          pause: last || endsQuote || _pauseMark.hasMatch(t),
+          token: k,
+        ),
       );
     }
-    if (_partEnd.hasMatch(t) && !last) part++;
+    if ((_partEnd.hasMatch(t) || endsQuote) && !last) part++;
   }
   return words;
 }

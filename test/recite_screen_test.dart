@@ -34,8 +34,9 @@ List<String> _plain(int n) => [
 ];
 
 Future<(FakeListener, SharedPreferences)> _openRecite(
-  WidgetTester tester,
-) async {
+  WidgetTester tester, {
+  String scope = 'full',
+}) async {
   // Tall enough to show the matn and the list of mistakes together.
   tester.view.physicalSize = const Size(1080, 3200);
   tester.view.devicePixelRatio = 2;
@@ -57,6 +58,8 @@ Future<(FakeListener, SharedPreferences)> _openRecite(
   await tester.tap(find.text('إنما الأعمال بالنيات').first);
   await tester.pumpAndSettle();
   await tester.tap(find.byKey(const ValueKey('open-recite')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(ValueKey('recite-choose-$scope')));
   await tester.pumpAndSettle();
   return (listener, prefs);
 }
@@ -164,6 +167,25 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('recite-device-only')));
     await tester.pumpAndSettle();
     expect(prefs.getBool('recite.allowOnline'), isFalse);
+  });
+
+  testWidgets('only the Prophet\'s words: the chain is shown, not asked', (
+    tester,
+  ) async {
+    final (listener, _) = await _openRecite(tester, scope: 'prophet');
+    expect(find.text('كلام رسول الله ﷺ فقط'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('recite-start')));
+    await tester.pump();
+    final quoted = _loadBook().ahadith[0].matn.split('«')[1].split('»')[0];
+    final said = [
+      for (final t in quoted.split(RegExp(r'\s+')))
+        if (t.replaceAll(_marks, '').replaceAll(RegExp('[^ء-ي]'), '')
+            case final w when w.isNotEmpty)
+          w,
+    ];
+    listener.say(said.join(' '), isFinal: true);
+    await tester.pumpAndSettle();
+    expect(find.text('أحسنت! سمّعت الحديث كاملًا دون خطأ.'), findsOneWidget);
   });
 }
 

@@ -54,11 +54,7 @@ class _HadithScreenState extends ConsumerState<HadithScreen> {
             icon: const Icon(Icons.mic_none),
             onPressed: () {
               ref.read(listenProvider.notifier).stop();
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => ReciteScreen(hadith: current),
-                ),
-              );
+              openRecite(context, current);
             },
           ),
           IconButton(

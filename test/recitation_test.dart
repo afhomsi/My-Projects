@@ -72,6 +72,33 @@ void main() {
     }
   });
 
+  test('only the Prophet\'s words: every hadith quoted right has no '
+      'mistakes, and the narration is not asked', () {
+    for (final h in book.ahadith) {
+      expect(hasProphetWords(h.matn), isTrue, reason: 'hadith ${h.number}');
+      final expected = wordsOfMatn(h.matn, scope: ReciteScope.prophetWords);
+      final quoted = RegExp('«([^»]*)»')
+          .allMatches(h.matn)
+          .map((m) => m[1]!)
+          .join(' ');
+      final r = alignRecitation(expected, plain(quoted));
+      expect(r.isComplete, isTrue, reason: 'hadith ${h.number}');
+      expect(r.mistakeCount, 0, reason: 'hadith ${h.number}');
+      expect(
+        expected.length,
+        lessThan(wordsOfMatn(h.matn).length),
+        reason: 'hadith ${h.number}',
+      );
+    }
+    // Hadith 2: Jibril's questions and Umar's narration are left out.
+    final jibril = wordsOfMatn(
+      hadith(2).matn,
+      scope: ReciteScope.prophetWords,
+    ).map((w) => w.text);
+    expect(jibril.first, '«الْإِسْلَامُ');
+    expect(jibril, isNot(contains('صَدَقْتَ.')));
+  });
+
   group('the long hadith of Jibril (2)', () {
     final expected = wordsOfMatn(hadith(2).matn);
     final heard = plain(hadith(2).matn);
