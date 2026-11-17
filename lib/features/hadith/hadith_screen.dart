@@ -7,6 +7,7 @@ import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 import '../arabic_numbers.dart';
 import '../audio/listen_bar.dart';
+import '../guided/guided_screen.dart';
 import '../memorize/memorize_screen.dart';
 import '../recitation/recite_screen.dart';
 
@@ -55,6 +56,15 @@ class _HadithScreenState extends ConsumerState<HadithScreen> {
             onPressed: () {
               ref.read(listenProvider.notifier).stop();
               openRecite(context, current);
+            },
+          ),
+          IconButton(
+            key: const ValueKey('open-guided'),
+            tooltip: s.guidedAction,
+            icon: const Icon(Icons.school_outlined),
+            onPressed: () {
+              ref.read(listenProvider.notifier).stop();
+              openGuided(context, current);
             },
           ),
           IconButton(

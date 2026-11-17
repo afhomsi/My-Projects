@@ -430,4 +430,69 @@ class SAr extends S {
   @override
   String get reciteScopeProphetHelp =>
       'ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك.';
+
+  @override
+  String get guidedAction => 'احفظ بصوتك خطوة بخطوة';
+
+  @override
+  String guidedTitle(String number) {
+    return 'الحفظ بالصوت: الحديث $number';
+  }
+
+  @override
+  String get guidedHelp =>
+      'تحفظ الحديث جملة جملة: تقرؤها وأنت تنظر إليها، ثم تسمّعها ونخفي منها شيئًا فشيئًا، ثم تربطها بما قبلها. تنتقل إلى الخطوة التالية حين تسمّع دون خطأ.';
+
+  @override
+  String guidedStep(String step, String steps) {
+    return 'الخطوة $step من $steps';
+  }
+
+  @override
+  String guidedUnit(String unit, String units) {
+    return 'الجملة $unit من $units';
+  }
+
+  @override
+  String get guidedStageRead => 'اقرأ الجملة بصوتك وأنت تنظر إليها.';
+
+  @override
+  String get guidedStageThird => 'أخفينا ثلث الكلمات: سمّع الجملة.';
+
+  @override
+  String get guidedStageTwoThirds => 'أخفينا ثلثي الكلمات: سمّع الجملة.';
+
+  @override
+  String get guidedStageAll => 'سمّع الجملة من حفظك.';
+
+  @override
+  String get guidedStageLink =>
+      'اربطها بالجملة التي قبلها: سمّعهما معًا من حفظك.';
+
+  @override
+  String get guidedStageWhole => 'سمّع الحديث كاملًا من حفظك.';
+
+  @override
+  String get guidedPassed => 'أحسنت! سمّعتها دون خطأ.';
+
+  @override
+  String get guidedFailed => 'فيها أخطاء، فأعد المحاولة.';
+
+  @override
+  String get guidedEasier => 'أظهرنا لك كلمات أكثر، لتتقنها ثم نخفيها من جديد.';
+
+  @override
+  String get guidedNext => 'الخطوة التالية';
+
+  @override
+  String get guidedRetry => 'أعد المحاولة';
+
+  @override
+  String get guidedDone => 'أتممت حفظ الحديث خطوة بخطوة، بارك الله فيك.';
+
+  @override
+  String get guidedReciteNow => 'سمّعه الآن كاملًا وقيّم حفظك';
+
+  @override
+  String get guidedStartOver => 'ابدأ من أول خطوة';
 }

@@ -27,6 +27,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          # Pinned as in CLAUDE.md: 3.50 deprecates material.dart imports,
+          # which `flutter analyze` reports and so fails CI.
+          flutter-version: 3.47.7
           cache: true
 
       # Without the secrets the build falls back to the debug key (a test

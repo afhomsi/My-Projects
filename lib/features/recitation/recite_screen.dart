@@ -422,7 +422,13 @@ class RecitedMatn extends StatelessWidget {
     this.from = 0,
     this.to,
     this.muteUnrecited = false,
+    this.shownTokens,
   });
+
+  /// Words of the matn, by token, that show in full before they are
+  /// recited, to read them aloud; the others to come stay hidden (or
+  /// faded with [showText]). Null hides them all.
+  final Set<int>? shownTokens;
 
   /// Shows the words not to recite (the narration around the Prophet's
   /// words) muted, as a cue.
@@ -482,6 +488,8 @@ class RecitedMatn extends StatelessWidget {
           wordStyle = null;
         } else if (hints.contains(i)) {
           wordStyle = hintStyle;
+        } else if (shownTokens?.contains(k) ?? false) {
+          wordStyle = null;
         } else {
           wordStyle = showText ? fadedStyle : hiddenStyle;
         }
@@ -498,48 +506,54 @@ class RecitedMatn extends StatelessWidget {
 }
 
 /// Asks whether to recite the whole hadith or only the Prophet's words ﷺ,
-/// then opens the tasmee' screen. Returns the review card when graded.
+/// when the hadith quotes them. Returns null when the user closes the
+/// question.
+Future<ReciteScope?> chooseReciteScope(
+  BuildContext context,
+  Hadith hadith,
+) async {
+  if (!hasProphetWords(hadith.matn)) return ReciteScope.full;
+  return showModalBottomSheet<ReciteScope>(
+    context: context,
+    showDragHandle: true,
+    builder: (context) {
+      final s = S.of(context);
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              s.reciteChooseTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            ListTile(
+              key: const ValueKey('recite-choose-full'),
+              leading: const Icon(Icons.menu_book_outlined),
+              title: Text(s.reciteScopeFull),
+              subtitle: Text(s.reciteScopeFullHelp),
+              onTap: () => Navigator.of(context).pop(ReciteScope.full),
+            ),
+            ListTile(
+              key: const ValueKey('recite-choose-prophet'),
+              leading: const Icon(Icons.format_quote_outlined),
+              title: Text(s.reciteScopeProphet),
+              subtitle: Text(s.reciteScopeProphetHelp),
+              onTap: () => Navigator.of(context).pop(ReciteScope.prophetWords),
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+/// Asks what to recite (see [chooseReciteScope]), then opens the tasmee'
+/// screen. Returns the review card when graded.
 Future<ReviewCard?> openRecite(BuildContext context, Hadith hadith) async {
-  var scope = ReciteScope.full;
-  if (hasProphetWords(hadith.matn)) {
-    final chosen = await showModalBottomSheet<ReciteScope>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) {
-        final s = S.of(context);
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                s.reciteChooseTitle,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 8),
-              ListTile(
-                key: const ValueKey('recite-choose-full'),
-                leading: const Icon(Icons.menu_book_outlined),
-                title: Text(s.reciteScopeFull),
-                subtitle: Text(s.reciteScopeFullHelp),
-                onTap: () => Navigator.of(context).pop(ReciteScope.full),
-              ),
-              ListTile(
-                key: const ValueKey('recite-choose-prophet'),
-                leading: const Icon(Icons.format_quote_outlined),
-                title: Text(s.reciteScopeProphet),
-                subtitle: Text(s.reciteScopeProphetHelp),
-                onTap: () =>
-                    Navigator.of(context).pop(ReciteScope.prophetWords),
-              ),
-              const SizedBox(height: 8),
-            ],
-          ),
-        );
-      },
-    );
-    if (chosen == null || !context.mounted) return null;
-    scope = chosen;
-  }
+  final scope = await chooseReciteScope(context, hadith);
+  if (scope == null || !context.mounted) return null;
   return Navigator.of(context).push<ReviewCard>(
     MaterialPageRoute(
       builder: (_) => ReciteScreen(hadith: hadith, scope: scope),

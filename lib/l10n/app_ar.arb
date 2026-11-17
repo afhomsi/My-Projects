@@ -336,5 +336,51 @@
   "reciteScopeFull": "الحديث كاملًا مع السند",
   "reciteScopeFullHelp": "من «عن ...» إلى آخر الحديث.",
   "reciteScopeProphet": "كلام رسول الله ﷺ فقط",
-  "reciteScopeProphetHelp": "ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك."
+  "reciteScopeProphetHelp": "ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك.",
+  "guidedAction": "احفظ بصوتك خطوة بخطوة",
+  "guidedTitle": "الحفظ بالصوت: الحديث {number}",
+  "@guidedTitle": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "guidedHelp": "تحفظ الحديث جملة جملة: تقرؤها وأنت تنظر إليها، ثم تسمّعها ونخفي منها شيئًا فشيئًا، ثم تربطها بما قبلها. تنتقل إلى الخطوة التالية حين تسمّع دون خطأ.",
+  "guidedStep": "الخطوة {step} من {steps}",
+  "@guidedStep": {
+    "placeholders": {
+      "step": {
+        "type": "String"
+      },
+      "steps": {
+        "type": "String"
+      }
+    }
+  },
+  "guidedUnit": "الجملة {unit} من {units}",
+  "@guidedUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      },
+      "units": {
+        "type": "String"
+      }
+    }
+  },
+  "guidedStageRead": "اقرأ الجملة بصوتك وأنت تنظر إليها.",
+  "guidedStageThird": "أخفينا ثلث الكلمات: سمّع الجملة.",
+  "guidedStageTwoThirds": "أخفينا ثلثي الكلمات: سمّع الجملة.",
+  "guidedStageAll": "سمّع الجملة من حفظك.",
+  "guidedStageLink": "اربطها بالجملة التي قبلها: سمّعهما معًا من حفظك.",
+  "guidedStageWhole": "سمّع الحديث كاملًا من حفظك.",
+  "guidedPassed": "أحسنت! سمّعتها دون خطأ.",
+  "guidedFailed": "فيها أخطاء، فأعد المحاولة.",
+  "guidedEasier": "أظهرنا لك كلمات أكثر، لتتقنها ثم نخفيها من جديد.",
+  "guidedNext": "الخطوة التالية",
+  "guidedRetry": "أعد المحاولة",
+  "guidedDone": "أتممت حفظ الحديث خطوة بخطوة، بارك الله فيك.",
+  "guidedReciteNow": "سمّعه الآن كاملًا وقيّم حفظك",
+  "guidedStartOver": "ابدأ من أول خطوة"
 }
