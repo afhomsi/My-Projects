@@ -692,6 +692,120 @@ abstract class S {
   /// In ar, this message translates to:
   /// **'ما بين علامتي التنصيص « »، ويظهر لك الباقي لتعرف موضعك.'**
   String get reciteScopeProphetHelp;
+
+  /// No description provided for @guidedAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'احفظ بصوتك خطوة بخطوة'**
+  String get guidedAction;
+
+  /// No description provided for @guidedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحفظ بالصوت: الحديث {number}'**
+  String guidedTitle(String number);
+
+  /// No description provided for @guidedHelp.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحفظ الحديث جملة جملة: تقرؤها وأنت تنظر إليها، ثم تسمّعها ونخفي منها شيئًا فشيئًا، ثم تربطها بما قبلها. تنتقل إلى الخطوة التالية حين تسمّع دون خطأ.'**
+  String get guidedHelp;
+
+  /// No description provided for @guidedStep.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوة {step} من {steps}'**
+  String guidedStep(String step, String steps);
+
+  /// No description provided for @guidedUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجملة {unit} من {units}'**
+  String guidedUnit(String unit, String units);
+
+  /// No description provided for @guidedStageRead.
+  ///
+  /// In ar, this message translates to:
+  /// **'اقرأ الجملة بصوتك وأنت تنظر إليها.'**
+  String get guidedStageRead;
+
+  /// No description provided for @guidedStageThird.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفينا ثلث الكلمات: سمّع الجملة.'**
+  String get guidedStageThird;
+
+  /// No description provided for @guidedStageTwoThirds.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفينا ثلثي الكلمات: سمّع الجملة.'**
+  String get guidedStageTwoThirds;
+
+  /// No description provided for @guidedStageAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع الجملة من حفظك.'**
+  String get guidedStageAll;
+
+  /// No description provided for @guidedStageLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'اربطها بالجملة التي قبلها: سمّعهما معًا من حفظك.'**
+  String get guidedStageLink;
+
+  /// No description provided for @guidedStageWhole.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّع الحديث كاملًا من حفظك.'**
+  String get guidedStageWhole;
+
+  /// No description provided for @guidedPassed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحسنت! سمّعتها دون خطأ.'**
+  String get guidedPassed;
+
+  /// No description provided for @guidedFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيها أخطاء، فأعد المحاولة.'**
+  String get guidedFailed;
+
+  /// No description provided for @guidedEasier.
+  ///
+  /// In ar, this message translates to:
+  /// **'أظهرنا لك كلمات أكثر، لتتقنها ثم نخفيها من جديد.'**
+  String get guidedEasier;
+
+  /// No description provided for @guidedNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطوة التالية'**
+  String get guidedNext;
+
+  /// No description provided for @guidedRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد المحاولة'**
+  String get guidedRetry;
+
+  /// No description provided for @guidedDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'أتممت حفظ الحديث خطوة بخطوة، بارك الله فيك.'**
+  String get guidedDone;
+
+  /// No description provided for @guidedReciteNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'سمّعه الآن كاملًا وقيّم حفظك'**
+  String get guidedReciteNow;
+
+  /// No description provided for @guidedStartOver.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ من أول خطوة'**
+  String get guidedStartOver;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {
